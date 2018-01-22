@@ -170,6 +170,7 @@ public class TableScoreActivity extends AppCompatActivity implements RadioGroup.
             startActivity(intent3);
         }else if(v==bt_validation){
 
+
              Intent intent3 = new Intent(this, ScoreActivity.class);
              startActivity(intent3);
 

@@ -37,7 +37,7 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
     //Données
 
     public Couleur couleur;
-    public List<Donne> donnes = null;
+    public List<Donne> donnes;
 
     //instanciation des fragments
 
@@ -80,9 +80,8 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
         tv_score_equipe1.setText("0");
         tv_score_equipe2.setText("0");
 
+
         //Traitement du recycler view
-
-
 
         recyclerView = findViewById(R.id.recycler_view);
 

@@ -8,6 +8,8 @@ public class Partie {
 
 
     // Variables d'instance
+
+    
     private TypeDePartie type;
     private Distributeur premierDistributeur;
     private SensJeu sensJeu;
