@@ -3,6 +3,7 @@ package com.example.thierrycouilleault.belotescore.Model.BDD;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 
 /**
@@ -10,7 +11,9 @@ import android.arch.persistence.room.PrimaryKey;
  */
 
 
-@Entity
+@Entity (foreignKeys = @ForeignKey(entity = Equipes.class,
+        parentColumns = "equipesid",
+        childColumns = "equipesid"))
 public class Partie {
 
     // Variables d'instance
@@ -23,11 +26,8 @@ public class Partie {
     private TypeDePartie type;
 
 
-    @ColumnInfo(name = "equipeA")
-    private Equipe equipeA;
-
-    @ColumnInfo(name = "equipeB")
-    private Equipe equipeB;
+    @ColumnInfo(name = "equipes")
+    private int equipesId;
 
 
     @ColumnInfo(name="premier_distributeur")
@@ -46,27 +46,24 @@ public class Partie {
     public Partie() {
     }
 
-    public Partie(TypeDePartie type, Distributeur premierDistributeur, SensJeu sensJeu, Equipe equipeA, Equipe equipeB, int partieId) {
+    public Partie(TypeDePartie type, Distributeur premierDistributeur, SensJeu sensJeu, int equipesId, int partieId) {
         this.type = type;
         this.premierDistributeur = premierDistributeur;
         this.sensJeu = sensJeu;
-        this.equipeA = equipeA;
-        this.equipeB = equipeB;
+        this.equipesId = equipesId;
         this.partieId = partieId;
     }
 
-    public Partie(TypeDePartie type, Distributeur premierDistributeur, SensJeu sensJeu, Equipe equipeA, Equipe equipeB) {
+    public Partie(TypeDePartie type, Distributeur premierDistributeur, SensJeu sensJeu, int equipesId) {
         this.type = type;
         this.premierDistributeur = premierDistributeur;
         this.sensJeu = sensJeu;
-        this.equipeA = equipeA;
-        this.equipeB = equipeB;
+        this.equipesId = equipesId;
     }
 
-    public Partie(TypeDePartie type, Equipe equipeA, Equipe equipeB) {
+    public Partie(TypeDePartie type, int equipesId) {
         this.type = type;
-        this.equipeA = equipeA;
-        this.equipeB = equipeB;
+        this.equipesId = equipesId;
     }
     //Autres méthodes
 

@@ -7,8 +7,9 @@ package com.example.thierrycouilleault.belotescore.Model.BDD;
 public class Equipe {
     //Variables d'instance
 
+
+    private int equipeId;
     private String nomEquipe;
-    private Joueur[] listeJoueurs;
     private Joueur joueur1, joueur2;
 
 
