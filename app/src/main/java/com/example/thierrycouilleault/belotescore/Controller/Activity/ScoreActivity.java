@@ -16,7 +16,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.thierrycouilleault.belotescore.Model.BDD.Couleur;
+import com.example.thierrycouilleault.belotescore.Model.BDD.Donne;
 import com.example.thierrycouilleault.belotescore.R;
+
+import java.util.List;
 
 public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
 
@@ -34,6 +37,7 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
     //Données
 
     public Couleur couleur;
+    public List<Donne> donnes = null;
 
     //instanciation des fragments
 
@@ -77,20 +81,16 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
         tv_score_equipe2.setText("0");
 
         //Traitement du recycler view
+
+
+
         recyclerView = findViewById(R.id.recycler_view);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new PartieAdapter();
+        adapter = new PartieAdapter(donnes);
 
         recyclerView.setAdapter(adapter);
-
-
-
-
-
-
-
 
 
     }
@@ -154,8 +154,6 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
             Intent intent2 = new Intent(this, TableScoreActivity.class);
 
             startActivity(intent2);
-
-
 
         }
     }
