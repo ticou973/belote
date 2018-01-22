@@ -41,8 +41,6 @@ public class NellePartieEquipeFragment extends Fragment implements View.OnClickL
     private Equipe equipe1, equipe2;
     private TypeDePartie type;
     private Partie partie;
-    private PartiePoints partiePoints;
-    private PartieDonnes partieDonnes;
     private TypeAnnonce typeAnnonce;
     private TypeJeu typeJeu;
     private String n = "Nous", e ="Eux";
@@ -181,13 +179,13 @@ public class NellePartieEquipeFragment extends Fragment implements View.OnClickL
             //lancement d'une partie avec points
             if (type.getTypeJeu() == TypeJeu.POINTS) {
                 int nbPointsPartie = Integer.parseInt(et_points2.getText().toString());
-                partie = new Partie(type, equipe1, equipe2, nbPointsPartie);
+                partie = new Partie();
                 onNellePartieEquipeFragmentListener.commencerPartie();
 
                 //lancement d'une partie avec donnes
             } else {
                 int nbDonnesPartie = Integer.parseInt(et_donnes2.getText().toString());
-                partie = new Partie(type, equipe1, equipe2, nbDonnesPartie);
+                partie = new Partie();
                 onNellePartieEquipeFragmentListener.commencerPartie();
             }
         }
