@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/it_param"
+        android:title="Paramètres partie en cours"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/it_supp_partie"
+        android:title="Supprimer cette partie"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/it_noter2"
+        android:title="Noter l'application"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/it_distributeur"
+        android:icon="?attr/actionModeShareDrawable"
+        android:title="Ditrisb."
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/it_stat"
+        android:icon="@android:drawable/ic_lock_lock"
+        android:title="Statistiques"
+        app:showAsAction="ifRoom" />
+</menu>
