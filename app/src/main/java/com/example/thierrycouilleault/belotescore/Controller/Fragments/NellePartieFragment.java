@@ -23,8 +23,6 @@ import com.example.thierrycouilleault.belotescore.Model.BDD.Joueur;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Distributeur;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Equipe;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Partie;
-import com.example.thierrycouilleault.belotescore.Model.BDD.PartieDonnes;
-import com.example.thierrycouilleault.belotescore.Model.BDD.PartiePoints;
 import com.example.thierrycouilleault.belotescore.Model.BDD.SensJeu;
 import com.example.thierrycouilleault.belotescore.Model.BDD.TypeAnnonce;
 import com.example.thierrycouilleault.belotescore.Model.BDD.TypeDePartie;
@@ -261,7 +259,7 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
             //lancement d'une partie avec points
             if (type.getTypeJeu() == TypeJeu.POINTS) {
                 int nbPointsPartie = Integer.parseInt(et_points.getText().toString());
-                partiePoints = new PartiePoints(type, premierDistributeur, sensJeu, equipeA, equipeB, nbPointsPartie);
+                partie = new Partie(type, premierDistributeur, sensJeu, equipeA, equipeB, nbPointsPartie);
                 onNellePartieFragmentListener.commencerPartie();
 
 
@@ -269,7 +267,7 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
                 //lancement d'une partie avec donnes
             } else {
                 int nbDonnesPartie = Integer.parseInt(et_donnes.getText().toString());
-                partieDonnes = new PartieDonnes(type, premierDistributeur, sensJeu, equipeA, equipeB, nbDonnesPartie);
+                partie = new Partie(type, premierDistributeur, sensJeu, equipeA, equipeB, nbDonnesPartie);
                 onNellePartieFragmentListener.commencerPartie();
             }
 

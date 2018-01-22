@@ -18,8 +18,6 @@ import android.widget.ToggleButton;
 
 import com.example.thierrycouilleault.belotescore.Model.BDD.Equipe;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Partie;
-import com.example.thierrycouilleault.belotescore.Model.BDD.PartieDonnes;
-import com.example.thierrycouilleault.belotescore.Model.BDD.PartiePoints;
 import com.example.thierrycouilleault.belotescore.Model.BDD.TypeAnnonce;
 import com.example.thierrycouilleault.belotescore.Model.BDD.TypeDePartie;
 import com.example.thierrycouilleault.belotescore.Model.BDD.TypeJeu;
@@ -183,13 +181,13 @@ public class NellePartieEquipeFragment extends Fragment implements View.OnClickL
             //lancement d'une partie avec points
             if (type.getTypeJeu() == TypeJeu.POINTS) {
                 int nbPointsPartie = Integer.parseInt(et_points2.getText().toString());
-                partiePoints = new PartiePoints(type, equipe1, equipe2, nbPointsPartie);
+                partie = new Partie(type, equipe1, equipe2, nbPointsPartie);
                 onNellePartieEquipeFragmentListener.commencerPartie();
 
                 //lancement d'une partie avec donnes
             } else {
                 int nbDonnesPartie = Integer.parseInt(et_donnes2.getText().toString());
-                partieDonnes = new PartieDonnes(type, equipe1, equipe2, nbDonnesPartie);
+                partie = new Partie(type, equipe1, equipe2, nbDonnesPartie);
                 onNellePartieEquipeFragmentListener.commencerPartie();
             }
         }
