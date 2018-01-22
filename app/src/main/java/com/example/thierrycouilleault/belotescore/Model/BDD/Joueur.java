@@ -1,20 +1,16 @@
 package com.example.thierrycouilleault.belotescore.Model.BDD;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-
 /**
  * Created by thierrycouilleault on 17/01/2018.
  */
 
 
-@Entity
+
 public class Joueur {
-    @PrimaryKey
+
     private int uid;
 
-    @ColumnInfo(name = "nom_joueur")
+
     private String nomJoueur;
 
 

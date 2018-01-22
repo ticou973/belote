@@ -1,6 +1,5 @@
 package com.example.thierrycouilleault.belotescore.Controller.Activity;
 
-import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -16,17 +15,9 @@ import com.example.thierrycouilleault.belotescore.Controller.Fragments.HistoFrag
 import com.example.thierrycouilleault.belotescore.Controller.Fragments.JoueursFragment;
 import com.example.thierrycouilleault.belotescore.Controller.Fragments.NellePartieEquipeFragment;
 import com.example.thierrycouilleault.belotescore.Controller.Fragments.NellePartieFragment;
-import com.example.thierrycouilleault.belotescore.Model.BDD.AppDatabase;
 import com.example.thierrycouilleault.belotescore.R;
 
 public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, NellePartieFragment.OnNellePartieFragmentListener {
-
-    //Database
-
-    AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-            AppDatabase.class, "AppDatabase").build();
-
-
 
 
     //Composants graphiques
