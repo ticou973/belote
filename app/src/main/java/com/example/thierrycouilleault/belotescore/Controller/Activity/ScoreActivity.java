@@ -6,11 +6,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -21,12 +22,13 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
 
     //Composants graphiques
 
-    public FrameLayout fl2;
     public android.support.v7.widget.Toolbar toolbar2;
     public ActionBar actionBar2;
     public TextView tv_joueur1, tv_joueur2, tv_joueur3, tv_joueur4, tv_score_equipe1, tv_score_equipe2;
     public FloatingActionButton fab_ajout_donne;
     public RadioGroup rgb2;
+    public RecyclerView recyclerView;
+    public RecyclerView.Adapter adapter;
 
 
     //Données
@@ -44,8 +46,6 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
         setContentView(R.layout.activity_score);
 
         //gestion des fragments dynamiques
-
-        fl2 = findViewById(R.id.fl2);
 
         toolbar2 = findViewById(R.id.toolbar2);
 
@@ -75,6 +75,21 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
         tv_joueur4.setText("joueurs4");
         tv_score_equipe1.setText("0");
         tv_score_equipe2.setText("0");
+
+        //Traitement du recycler view
+        recyclerView = findViewById(R.id.recycler_view);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        adapter = new PartieAdapter();
+
+        recyclerView.setAdapter(adapter);
+
+
+
+
+
+
 
 
 
