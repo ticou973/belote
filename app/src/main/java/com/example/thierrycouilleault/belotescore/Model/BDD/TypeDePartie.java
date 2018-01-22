@@ -8,10 +8,10 @@ public class TypeDePartie {
 
     // Variables d'instance
 
-    private TypeAnnonce typeAnnonce = TypeAnnonce.SANS_ANNONCE;
     private TypeJeu typeJeu=TypeJeu.POINTS;
-    private PartiePoints partiePoints;
-    private PartieDonnes partieDonnes;
+    private TypeAnnonce typeAnnonce = TypeAnnonce.SANS_ANNONCE;
+    private int nbPoints;
+    private int nbDonnes;
 
 
     //Variables statiques
@@ -22,27 +22,11 @@ public class TypeDePartie {
     public TypeDePartie(TypeAnnonce typeAnnonce, TypeJeu typeJeu) {
         this.typeAnnonce = typeAnnonce;
         this.typeJeu = typeJeu;
-
-        if (typeJeu == TypeJeu.POINTS) {
-            partiePoints = new PartiePoints(1001);
-
-        }else{
-            partieDonnes = new PartieDonnes(12);
-        }
     }
 
      public TypeDePartie() {
-         if (typeJeu == TypeJeu.POINTS) {
-             partiePoints = new PartiePoints(1001);
 
-         }else{
-             partieDonnes = new PartieDonnes(12);
-         }
     }
-
-
-
-
 
 
     //Autres méthodes
