@@ -1,5 +1,6 @@
 package com.example.thierrycouilleault.belotescore.Controller.Activity;
 
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.example.thierrycouilleault.belotescore.Model.BDD.AppDatabase;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Couleur;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Donne;
 import com.example.thierrycouilleault.belotescore.R;
@@ -73,6 +75,16 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
         tv_joueur4.setText("joueurs4");
         tv_score_equipe1.setText("0");
         tv_score_equipe2.setText("0");
+
+
+        //Gestion de la DB
+
+        final AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "production")
+                .allowMainThreadQueries()
+                .build();
+
+
+
 
 
         //Traitement du recycler view

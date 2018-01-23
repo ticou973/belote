@@ -1,6 +1,7 @@
 package com.example.thierrycouilleault.belotescore.Model.BDD;
 
 import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
@@ -24,11 +25,10 @@ public class Donne {
     @ColumnInfo (name = "num_donne_partie")
     private int numDonne;
 
-    @ColumnInfo(name ="preneur")
+    @Embedded
     private Joueur preneur;
 
-
-    @ColumnInfo(name ="couleur")
+    @Embedded
     private Couleur couleur;
 
     @ColumnInfo (name ="belote")

@@ -13,7 +13,7 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity (foreignKeys = @ForeignKey(entity = Equipes.class,
         parentColumns = "equipesId",
-        childColumns = "equipesId"))
+        childColumns = "equipes"))
 public class Partie {
 
     // Variables d'instance
@@ -30,11 +30,11 @@ public class Partie {
     private int equipesId;
 
 
-    @ColumnInfo(name="premier_distributeur")
+    @Embedded
     private Joueur premierDistributeur;
 
-    @ColumnInfo(name="sens_jeu")
-    private SensJeu sensJeu;
+    @ColumnInfo(name ="sens_jeu")
+    private boolean sensJeu;
 
 
     //Variables statiques
@@ -82,11 +82,11 @@ public class Partie {
         this.premierDistributeur = premierDistributeur;
     }
 
-    public SensJeu getSensJeu() {
+    public boolean isSensJeu() {
         return sensJeu;
     }
 
-    public void setSensJeu(SensJeu sensJeu) {
+    public void setSensJeu(boolean sensJeu) {
         this.sensJeu = sensJeu;
     }
 }

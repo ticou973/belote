@@ -6,5 +6,8 @@ package com.example.thierrycouilleault.belotescore.Model.BDD;
 
 public enum SensJeu {
     SENS_AIGUILLE,
-    SENS_INVERSE_AIGUILLE
+    SENS_INVERSE_AIGUILLE;
+
+    SensJeu() {
+    }
 }

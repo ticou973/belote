@@ -8,10 +8,10 @@ public class TypeDePartie {
 
     // Variables d'instance
 
-    private TypeJeu typeJeu=TypeJeu.POINTS;
-    private TypeAnnonce typeAnnonce = TypeAnnonce.SANS_ANNONCE;
-    private int nbPoints;
-    private int nbDonnes;
+    private String typeJeu=TypeJeu.POINTS.toString();
+    private String typeAnnonce = TypeAnnonce.SANS_ANNONCE.toString();
+    private int nbPoints = 1001;
+    private int nbDonnes = Integer.parseInt(null);
 
 
     //Variables statiques
@@ -30,19 +30,19 @@ public class TypeDePartie {
     //Getter et Setter
 
 
-    public TypeJeu getTypeJeu() {
+    public String getTypeJeu() {
         return typeJeu;
     }
 
-    public void setTypeJeu(TypeJeu typeJeu) {
+    public void setTypeJeu(String typeJeu) {
         this.typeJeu = typeJeu;
     }
 
-    public TypeAnnonce getTypeAnnonce() {
+    public String getTypeAnnonce() {
         return typeAnnonce;
     }
 
-    public void setTypeAnnonce(TypeAnnonce typeAnnonce) {
+    public void setTypeAnnonce(String typeAnnonce) {
         this.typeAnnonce = typeAnnonce;
     }
 
