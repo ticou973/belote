@@ -6,7 +6,7 @@ import android.arch.persistence.room.TypeConverter;
  * Created by thierrycouilleault on 23/01/2018.
  */
 
-public class converters {
+public class Converters {
     @TypeConverter
     public static int couleurToCodeCouleur(Couleur couleur) {
 

@@ -12,7 +12,7 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity (foreignKeys = @ForeignKey(entity = Partie.class,
         parentColumns = "partieId",
-        childColumns = "partieId"))
+        childColumns = "num_partie"))
 public class Donne {
 
     @PrimaryKey (autoGenerate = true)
@@ -28,7 +28,7 @@ public class Donne {
     @Embedded
     private Joueur preneur;
 
-    @Embedded
+    @ColumnInfo(name="couleur")
     private Couleur couleur;
 
     @ColumnInfo (name ="belote")
