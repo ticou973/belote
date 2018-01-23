@@ -2,7 +2,6 @@ package com.example.thierrycouilleault.belotescore.Model.BDD;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 
 /**
@@ -10,9 +9,7 @@ import android.arch.persistence.room.PrimaryKey;
  */
 
 
-@Entity(foreignKeys = @ForeignKey(entity = Joueur.class,
-        parentColumns = {"joueurId", "joueurId"},
-        childColumns = {"joueur1","joueur2"}))
+@Entity
 public class Equipe {
     //Variables d'instance
 

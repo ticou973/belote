@@ -166,7 +166,7 @@ public class NellePartieEquipeFragment extends Fragment implements View.OnClickL
             //Lancement d'une partie
 
             //lancement d'une partie avec points
-            if (type.getTypeJeu() == TypeJeu.POINTS) {
+            if (type.getTypeJeu() == TypeJeu.POINTS.toString()) {
                 int nbPointsPartie = Integer.parseInt(et_points2.getText().toString());
                 //onNellePartieEquipeFragmentListener.commencerPartie();
 
@@ -206,10 +206,10 @@ public class NellePartieEquipeFragment extends Fragment implements View.OnClickL
 
         if(isChecked) {
             if (buttonView==tb_annonces2) {
-                type.setTypeAnnonce(TypeAnnonce.SANS_ANNONCE);
+                type.setTypeAnnonce(TypeAnnonce.SANS_ANNONCE.toString());
 
             } else if (buttonView==tb_type_partie2){
-                type.setTypeJeu(TypeJeu.DONNES);
+                type.setTypeJeu(TypeJeu.DONNES.toString());
 
                 et_points2.setVisibility(View.INVISIBLE);
                 et_donnes2.setVisibility(View.VISIBLE);
@@ -219,10 +219,10 @@ public class NellePartieEquipeFragment extends Fragment implements View.OnClickL
 
         } else {
             if (buttonView==tb_annonces2) {
-                type.setTypeAnnonce(TypeAnnonce.AVEC_ANNONCES);
+                type.setTypeAnnonce(TypeAnnonce.AVEC_ANNONCES.toString());
 
             } else if(buttonView==tb_type_partie2){
-                type.setTypeJeu(TypeJeu.POINTS);
+                type.setTypeJeu(TypeJeu.POINTS.toString());
 
                 et_points2.setVisibility(View.VISIBLE);
                 et_donnes2.setVisibility(View.INVISIBLE);

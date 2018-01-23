@@ -203,9 +203,6 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
             joueur3 = new Joueur(et_joueur3.getText().toString());
             joueur4 = new Joueur(et_joueur4.getText().toString());
 
-            equipeA = new Equipe(joueur1, joueur2, "equipeA");
-            equipeB = new Equipe(joueur3, joueur4, "equipeB");
-
 
             //Mettre les noms en face des joueurs pour le distributeur
             rb1.setText(et_joueur1.getText().toString());
@@ -235,7 +232,7 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
             //Lancement d'une partie
 
             //lancement d'une partie avec points
-            if (type.getTypeJeu() == TypeJeu.POINTS) {
+            if (type.getTypeJeu() == TypeJeu.POINTS.toString()) {
                 int nbPointsPartie = Integer.parseInt(et_points.getText().toString());
                 onNellePartieFragmentListener.commencerPartie();
 
@@ -299,10 +296,10 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
 
         if(isChecked) {
             if (buttonView==tb_annonces) {
-                type.setTypeAnnonce(TypeAnnonce.SANS_ANNONCE);
+                type.setTypeAnnonce(TypeAnnonce.SANS_ANNONCE.toString());
 
             } else if (buttonView==tb_type_partie){
-                type.setTypeJeu(TypeJeu.DONNES);
+                type.setTypeJeu(TypeJeu.DONNES.toString());
 
                 et_points.setVisibility(View.INVISIBLE);
                 et_donnes.setVisibility(View.VISIBLE);
@@ -314,10 +311,10 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
 
         } else {
             if (buttonView==tb_annonces) {
-                type.setTypeAnnonce(TypeAnnonce.AVEC_ANNONCES);
+                type.setTypeAnnonce(TypeAnnonce.AVEC_ANNONCES.toString());
 
             } else if(buttonView==tb_type_partie){
-                type.setTypeJeu(TypeJeu.POINTS);
+                type.setTypeJeu(TypeJeu.POINTS.toString());
 
                 et_points.setVisibility(View.VISIBLE);
                 et_donnes.setVisibility(View.INVISIBLE);

@@ -2,16 +2,13 @@ package com.example.thierrycouilleault.belotescore.Model.BDD;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 
 /**
  * Created by thierrycouilleault on 22/01/2018.
  */
 
-@Entity(foreignKeys = @ForeignKey(entity = Equipe.class,
-        parentColumns = {"equipeId", "equipeId"},
-        childColumns = {"equipeA","equipeB"}))
+@Entity
 public class Equipes {
 
    @PrimaryKey (autoGenerate = true)
@@ -22,8 +19,6 @@ public class Equipes {
 
     @ColumnInfo(name ="equipeB")
     private int equipeIdB;
-
-
 
 
 
