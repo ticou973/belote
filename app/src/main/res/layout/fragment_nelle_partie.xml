@@ -77,8 +77,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
+                            android:hint="Vous"
                             android:inputType="textPersonName"
-                            android:text="Vous"
                             android:textAlignment="center"
                             android:textColor="@android:color/darker_gray" />
 
@@ -87,8 +87,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
+                            android:hint="Votre partenaire"
                             android:inputType="textPersonName"
-                            android:text="Votre partenaire"
                             android:textAlignment="center"
                             android:textColor="@android:color/darker_gray" />
 
@@ -114,8 +114,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
+                            android:hint="A votre gauche"
                             android:inputType="textPersonName"
-                            android:text="A votre gauche"
                             android:textAlignment="center"
                             android:textColor="@android:color/darker_gray" />
 
@@ -124,8 +124,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
+                            android:hint="A votre droite"
                             android:inputType="textPersonName"
-                            android:text="A votre droite"
                             android:textAlignment="center"
                             android:textColor="@android:color/darker_gray" />
 

@@ -135,17 +135,6 @@ public class NellePartieEquipeFragment extends Fragment implements View.OnClickL
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-    }
 
     //Méthode lorsque l'on clique sur les EditText ou boutons
     @Override
@@ -179,13 +168,11 @@ public class NellePartieEquipeFragment extends Fragment implements View.OnClickL
             //lancement d'une partie avec points
             if (type.getTypeJeu() == TypeJeu.POINTS) {
                 int nbPointsPartie = Integer.parseInt(et_points2.getText().toString());
-                partie = new Partie();
                 onNellePartieEquipeFragmentListener.commencerPartie();
 
                 //lancement d'une partie avec donnes
             } else {
                 int nbDonnesPartie = Integer.parseInt(et_donnes2.getText().toString());
-                partie = new Partie();
                 onNellePartieEquipeFragmentListener.commencerPartie();
             }
         }

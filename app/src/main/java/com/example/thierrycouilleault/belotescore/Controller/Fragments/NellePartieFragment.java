@@ -83,11 +83,6 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
     }
 
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -182,23 +177,8 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
         sensJeu = SensJeu.SENS_AIGUILLE;
         premierDistributeur.setNomJoueur(rb1.getText().toString());
 
-
-
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-
-    }
-
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-    }
 
     //Méthode lorsque l'on clique sur les EditText ou boutons
     @Override
@@ -257,7 +237,6 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
             //lancement d'une partie avec points
             if (type.getTypeJeu() == TypeJeu.POINTS) {
                 int nbPointsPartie = Integer.parseInt(et_points.getText().toString());
-                partie = new Partie();
                 onNellePartieFragmentListener.commencerPartie();
 
 
@@ -265,7 +244,6 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
                 //lancement d'une partie avec donnes
             } else {
                 int nbDonnesPartie = Integer.parseInt(et_donnes.getText().toString());
-                partie = new Partie();
                 onNellePartieFragmentListener.commencerPartie();
             }
 
