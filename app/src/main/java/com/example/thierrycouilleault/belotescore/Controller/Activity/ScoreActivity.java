@@ -3,7 +3,6 @@ package com.example.thierrycouilleault.belotescore.Controller.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -39,17 +38,12 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
     public Couleur couleur;
     public List<Donne> donnes;
 
-    //instanciation des fragments
-
-
-    public FragmentTransaction transaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
-        //gestion des fragments dynamiques
 
         toolbar2 = findViewById(R.id.toolbar2);
 

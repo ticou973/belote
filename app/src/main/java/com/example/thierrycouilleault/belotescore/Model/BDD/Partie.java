@@ -12,8 +12,8 @@ import android.arch.persistence.room.PrimaryKey;
 
 
 @Entity (foreignKeys = @ForeignKey(entity = Equipes.class,
-        parentColumns = "equipesid",
-        childColumns = "equipesid"))
+        parentColumns = "equipesId",
+        childColumns = "equipesId"))
 public class Partie {
 
     // Variables d'instance
@@ -31,11 +31,10 @@ public class Partie {
 
 
     @ColumnInfo(name="premier_distributeur")
-    private Distributeur premierDistributeur;
+    private Joueur premierDistributeur;
 
     @ColumnInfo(name="sens_jeu")
     private SensJeu sensJeu;
-
 
 
     //Variables statiques
@@ -43,28 +42,7 @@ public class Partie {
 
     //Méthodes constructeurs
 
-    public Partie() {
-    }
 
-    public Partie(TypeDePartie type, Distributeur premierDistributeur, SensJeu sensJeu, int equipesId, int partieId) {
-        this.type = type;
-        this.premierDistributeur = premierDistributeur;
-        this.sensJeu = sensJeu;
-        this.equipesId = equipesId;
-        this.partieId = partieId;
-    }
-
-    public Partie(TypeDePartie type, Distributeur premierDistributeur, SensJeu sensJeu, int equipesId) {
-        this.type = type;
-        this.premierDistributeur = premierDistributeur;
-        this.sensJeu = sensJeu;
-        this.equipesId = equipesId;
-    }
-
-    public Partie(TypeDePartie type, int equipesId) {
-        this.type = type;
-        this.equipesId = equipesId;
-    }
     //Autres méthodes
 
 
@@ -72,4 +50,43 @@ public class Partie {
     //Getter et Setter
 
 
+    public int getPartieId() {
+        return partieId;
+    }
+
+    public void setPartieId(int partieId) {
+        this.partieId = partieId;
+    }
+
+    public TypeDePartie getType() {
+        return type;
+    }
+
+    public void setType(TypeDePartie type) {
+        this.type = type;
+    }
+
+    public int getEquipesId() {
+        return equipesId;
+    }
+
+    public void setEquipesId(int equipesId) {
+        this.equipesId = equipesId;
+    }
+
+    public Joueur getPremierDistributeur() {
+        return premierDistributeur;
+    }
+
+    public void setPremierDistributeur(Joueur premierDistributeur) {
+        this.premierDistributeur = premierDistributeur;
+    }
+
+    public SensJeu getSensJeu() {
+        return sensJeu;
+    }
+
+    public void setSensJeu(SensJeu sensJeu) {
+        this.sensJeu = sensJeu;
+    }
 }

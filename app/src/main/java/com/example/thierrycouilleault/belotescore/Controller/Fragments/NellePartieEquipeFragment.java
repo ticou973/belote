@@ -168,12 +168,12 @@ public class NellePartieEquipeFragment extends Fragment implements View.OnClickL
             //lancement d'une partie avec points
             if (type.getTypeJeu() == TypeJeu.POINTS) {
                 int nbPointsPartie = Integer.parseInt(et_points2.getText().toString());
-                onNellePartieEquipeFragmentListener.commencerPartie();
+                //onNellePartieEquipeFragmentListener.commencerPartie();
 
                 //lancement d'une partie avec donnes
             } else {
                 int nbDonnesPartie = Integer.parseInt(et_donnes2.getText().toString());
-                onNellePartieEquipeFragmentListener.commencerPartie();
+                //onNellePartieEquipeFragmentListener.commencerPartie();
             }
         }
     }

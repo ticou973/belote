@@ -19,10 +19,6 @@ public class TypeDePartie {
 
     //Méthodes constructeurs
 
-    public TypeDePartie(TypeAnnonce typeAnnonce, TypeJeu typeJeu) {
-        this.typeAnnonce = typeAnnonce;
-        this.typeJeu = typeJeu;
-    }
 
      public TypeDePartie() {
 
@@ -33,6 +29,15 @@ public class TypeDePartie {
 
     //Getter et Setter
 
+
+    public TypeJeu getTypeJeu() {
+        return typeJeu;
+    }
+
+    public void setTypeJeu(TypeJeu typeJeu) {
+        this.typeJeu = typeJeu;
+    }
+
     public TypeAnnonce getTypeAnnonce() {
         return typeAnnonce;
     }
@@ -41,11 +46,19 @@ public class TypeDePartie {
         this.typeAnnonce = typeAnnonce;
     }
 
-    public TypeJeu getTypeJeu() {
-        return typeJeu;
+    public int getNbPoints() {
+        return nbPoints;
     }
 
-    public void setTypeJeu(TypeJeu typeJeu) {
-        this.typeJeu = typeJeu;
+    public void setNbPoints(int nbPoints) {
+        this.nbPoints = nbPoints;
+    }
+
+    public int getNbDonnes() {
+        return nbDonnes;
+    }
+
+    public void setNbDonnes(int nbDonnes) {
+        this.nbDonnes = nbDonnes;
     }
 }

@@ -1,18 +1,49 @@
 package com.example.thierrycouilleault.belotescore.Model.BDD;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.PrimaryKey;
+
 /**
  * Created by thierrycouilleault on 13/11/2017.
  */
 
+@Entity (foreignKeys = @ForeignKey(entity = Partie.class,
+        parentColumns = "partieId",
+        childColumns = "partieId"))
 public class Donne {
 
-    private Partie partie;
+    @PrimaryKey (autoGenerate = true)
+    private int donneId;
+
+    @ColumnInfo (name ="num_partie")
+    private int partieId;
+
+
+    @ColumnInfo (name = "num_donne_partie")
     private int numDonne;
-    private Preneur preneur;
+
+    @ColumnInfo(name ="preneur")
+    private Joueur preneur;
+
+
+    @ColumnInfo(name ="couleur")
     private Couleur couleur;
+
+    @ColumnInfo (name ="belote")
     private boolean belote;
+
+    @ColumnInfo (name ="capot")
     private boolean capot;
-    private int score1, score2;
+
+    @ColumnInfo (name = "score_equipeA")
+    private int score1;
+
+    @ColumnInfo (name = "score_equipeB")
+    private int score2;
+
+
 
     // constructeur
 
@@ -22,12 +53,20 @@ public class Donne {
     //getter et setter
 
 
-    public Partie getPartie() {
-        return partie;
+    public int getDonneId() {
+        return donneId;
     }
 
-    public void setPartie(Partie partie) {
-        this.partie = partie;
+    public void setDonneId(int donneId) {
+        this.donneId = donneId;
+    }
+
+    public int getPartieId() {
+        return partieId;
+    }
+
+    public void setPartieId(int partieId) {
+        this.partieId = partieId;
     }
 
     public int getNumDonne() {
@@ -38,11 +77,11 @@ public class Donne {
         this.numDonne = numDonne;
     }
 
-    public Preneur getPreneur() {
+    public Joueur getPreneur() {
         return preneur;
     }
 
-    public void setPreneur(Preneur preneur) {
+    public void setPreneur(Joueur preneur) {
         this.preneur = preneur;
     }
 
