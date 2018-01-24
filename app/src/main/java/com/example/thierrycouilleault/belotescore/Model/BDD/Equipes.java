@@ -28,6 +28,11 @@ public class Equipes {
         this.equipeIdB = equipeIdB;
     }
 
+    public Equipes(){
+    }
+
+
+
 
     //Getter et setter
 

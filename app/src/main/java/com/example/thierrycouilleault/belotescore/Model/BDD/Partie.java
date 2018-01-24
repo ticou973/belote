@@ -49,6 +49,10 @@ public class Partie {
         this.sensJeu = sensJeu;
     }
 
+    public Partie(TypeDePartie type, int equipesId) {
+        this.type = type;
+        this.equipesId = equipesId;
+    }
 
     //Autres méthodes
 

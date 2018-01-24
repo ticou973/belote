@@ -38,6 +38,7 @@ public class Equipe {
         this.joueur2=joueur2;
     }
 
+
     public Equipe(String nomEquipe) {
         this.nomEquipe = nomEquipe;
     }

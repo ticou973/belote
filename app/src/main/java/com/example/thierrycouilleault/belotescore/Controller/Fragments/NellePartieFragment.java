@@ -170,9 +170,6 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
 
 
 
-
-
-
         //TODO : mettre le focus sur le nombre de points et donnes
 
         //Actions

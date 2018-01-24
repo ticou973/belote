@@ -1,6 +1,7 @@
 package com.example.thierrycouilleault.belotescore.Controller.Fragments;
 
 
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,10 +14,11 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.example.thierrycouilleault.belotescore.Model.BDD.AppDatabase;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Equipe;
+import com.example.thierrycouilleault.belotescore.Model.BDD.Equipes;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Partie;
 import com.example.thierrycouilleault.belotescore.Model.BDD.TypeAnnonce;
 import com.example.thierrycouilleault.belotescore.Model.BDD.TypeDePartie;
@@ -31,14 +33,15 @@ public class NellePartieEquipeFragment extends Fragment implements View.OnClickL
     private EditText et_equipe1, et_equipe2, et_points2, et_donnes2;
     private Button bt_suivant_joueurs_type_partie2, bt_commencer_partie2;
     private LinearLayout ll_joueurs2, ll_annonces2;
-    private TextView tv_console2;
     private ToggleButton tb_annonces2, tb_type_partie2;
     private CollapsingToolbarLayout ctl2;
 
     //Données
 
 
-    private Equipe equipe1, equipe2;
+    private Equipe equipeA, equipeB;
+    private int equipeIdA, equipeIdB;
+    private Equipes equipes;
     private TypeDePartie type;
     private Partie partie;
     private TypeAnnonce typeAnnonce;
@@ -98,8 +101,6 @@ public class NellePartieEquipeFragment extends Fragment implements View.OnClickL
 
         ctl2 = getActivity().findViewById(R.id.ctl2);
 
-        tv_console2 = getActivity().findViewById(R.id.tv_console2);
-
         //listener d'événementd
         et_points2.setOnClickListener(this);
         et_donnes2.setOnClickListener(this);
@@ -121,17 +122,12 @@ public class NellePartieEquipeFragment extends Fragment implements View.OnClickL
         et_equipe1.requestFocus();
 
 
-        tv_console2.setVisibility(View.INVISIBLE);
-
         //TODO : mettre le focus sur le nombre de points et donnes
 
         //Actions
 
         verfieNomsDifferents(nomEquipe1, nomEquipe2);
 
-
-        //Instanciation et Initialisation des valeurs
-        type = new TypeDePartie();
 
     }
 
@@ -151,12 +147,6 @@ public class NellePartieEquipeFragment extends Fragment implements View.OnClickL
             bt_suivant_joueurs_type_partie2.setEnabled(false);
 
 
-            //Création des joueurs et des équipes
-
-            equipe1 = new Equipe("equipeA");
-            equipe2 = new Equipe("equipeB");
-
-
 
             //TODO : faire un collapse de la fenêtre joueurs et typejeu
             //todo : faire le retour arrière dans les fenêtres
@@ -165,15 +155,65 @@ public class NellePartieEquipeFragment extends Fragment implements View.OnClickL
         }  else if (v == bt_commencer_partie2) {
             //Lancement d'une partie
 
+            final AppDatabase db = Room.databaseBuilder(getActivity().getApplicationContext(), AppDatabase.class, "production")
+                    .allowMainThreadQueries()
+                    .build();
+
+
+            //Création des équipes
+            equipeA = new Equipe("EquipeA");
+            equipeB = new Equipe("EquipeB");
+
+            //Insertion des équipes
+            db.equipeDao().insertAll(equipeA);
+            db.equipeDao().insertAll(equipeB);
+
+            //todo gérer les doublons
+
+            //Création des Equipes (paires d'équipes
+            equipes = new Equipes();
+
+
+
+            //Insertion des Equipes dans la BD
+
+            db.equipesDao().insertAll(equipes);
+
+
+
             //lancement d'une partie avec points
             if (type.getTypeJeu() == TypeJeu.POINTS.toString()) {
                 int nbPointsPartie = Integer.parseInt(et_points2.getText().toString());
-                //onNellePartieEquipeFragmentListener.commencerPartie();
+
+                //Remplissage du type de jeu
+                type.setNbPoints(nbPointsPartie);
+                type.setNbDonnes(Integer.parseInt(null));
+
+
+                //Création d'une nouvelle partie
+                partie = new Partie(type, equipes.getEquipesId());
+
+                // Insertion partie dans la DB
+                db.partieDao().insertAll(partie);
+
+                onNellePartieEquipeFragmentListener.commencerPartie();
 
                 //lancement d'une partie avec donnes
             } else {
                 int nbDonnesPartie = Integer.parseInt(et_donnes2.getText().toString());
-                //onNellePartieEquipeFragmentListener.commencerPartie();
+
+                //Remplissage du type de jeu
+                type.setNbPoints(Integer.parseInt(null));
+                type.setNbDonnes(nbDonnesPartie);
+
+
+                //Création d'une nouvelle partie
+                partie = new Partie(type, equipes.getEquipesId());
+
+                // Insertion partie dans la DB
+                db.partieDao().insertAll(partie);
+
+                onNellePartieEquipeFragmentListener.commencerPartie();
             }
         }
     }
