@@ -22,6 +22,7 @@ import android.widget.ToggleButton;
 import com.example.thierrycouilleault.belotescore.Model.BDD.AppDatabase;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Distributeur;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Equipe;
+import com.example.thierrycouilleault.belotescore.Model.BDD.Equipes;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Joueur;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Partie;
 import com.example.thierrycouilleault.belotescore.Model.BDD.SensJeu;
@@ -48,7 +49,10 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
     //Données
 
     private Joueur joueur1, joueur2, joueur3, joueur4;
+    private int joueurId1, joueurId2, joueurId3, joueurId4;
     private Equipe equipeA, equipeB;
+    private int equipeIdA, equipeIdB;
+    private Equipes equipes;
     private TypeDePartie type;
     private Partie partie;
     private Distributeur premierDistributeur;
@@ -66,6 +70,8 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
 
     public interface OnNellePartieFragmentListener {
         public void commencerPartie();
+
+
     }
 
     @Override
@@ -98,6 +104,8 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+
 
         et_joueur1 = getActivity().findViewById(R.id.et_joueur1);
         et_joueur2 = getActivity().findViewById(R.id.et_joueur2);
@@ -184,6 +192,15 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         if (v == bt_suivant_joueurs_type_partie) {
+
+            //construction de la DB
+
+            final AppDatabase db = Room.databaseBuilder(getActivity().getApplicationContext(), AppDatabase.class, "production")
+                    .allowMainThreadQueries()
+                    .build();
+
+
+
             //mettre en alpha les layouts non utilisés
             ll_joueurs.setAlpha(0.2f);
             ll_annonces.setVisibility(View.VISIBLE);
@@ -202,6 +219,19 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
             joueur2 = new Joueur(et_joueur2.getText().toString());
             joueur3 = new Joueur(et_joueur3.getText().toString());
             joueur4 = new Joueur(et_joueur4.getText().toString());
+
+            joueurId1 = db.joueurDao().loadJoueurByName(joueur1.getNomJoueur()).getJoueurId();
+            joueurId2 = db.joueurDao().loadJoueurByName(joueur2.getNomJoueur()).getJoueurId();
+            joueurId3 = db.joueurDao().loadJoueurByName(joueur3.getNomJoueur()).getJoueurId();
+            joueurId4 = db.joueurDao().loadJoueurByName(joueur4.getNomJoueur()).getJoueurId();
+
+            equipeA = new Equipe(joueurId1, joueurId2, "EquipeA");
+            equipeB = new Equipe(joueurId3, joueurId4, "EquipeB");
+
+            equipeIdA = db.equipeDao().loadEquipeByJoueursIds(joueurId1, joueurId2).getEquipeId();
+            equipeIdB = db.equipeDao().loadEquipeByJoueursIds(joueurId3, joueurId4).getEquipeId();
+
+            equipes = new Equipes(equipeIdA, equipeIdB);
 
 
             //Mettre les noms en face des joueurs pour le distributeur
@@ -227,23 +257,36 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
             et_donnes.setEnabled(false);
             et_points.setEnabled(false);
 
+            //Création du type de partie
+
+
 
         } else if (v == bt_commencer_partie) {
             //Lancement d'une partie
 
             //Gestion de la DB
 
+            //construction de la DB
+
             final AppDatabase db = Room.databaseBuilder(getActivity().getApplicationContext(), AppDatabase.class, "production")
                     .allowMainThreadQueries()
                     .build();
 
             //MAJ des données
+
+            //Joueurs
             db.joueurDao().insertAll(joueur1);
             db.joueurDao().insertAll(joueur2);
             db.joueurDao().insertAll(joueur3);
             db.joueurDao().insertAll(joueur4);
 
-            
+            //Equipes
+
+
+
+
+
+
 
             //lancement d'une partie avec points
             if (type.getTypeJeu() == TypeJeu.POINTS.toString()) {

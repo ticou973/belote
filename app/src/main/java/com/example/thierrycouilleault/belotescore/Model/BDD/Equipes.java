@@ -21,10 +21,15 @@ public class Equipes {
     private int equipeIdB;
 
 
+// Constructeurs
+
+    public Equipes(int equipeIdA, int equipeIdB) {
+        this.equipeIdA = equipeIdA;
+        this.equipeIdB = equipeIdB;
+    }
 
 
-
-   //Getter et setter
+    //Getter et setter
 
 
     public int getEquipesId() {
