@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
 
 
-
-
     //Données
 
     public static final String EXTRA_MESSAGE="com.example.thierrycouilleault.belotescore.MESSAGE";

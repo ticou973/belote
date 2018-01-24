@@ -1,6 +1,7 @@
 package com.example.thierrycouilleault.belotescore.Controller.Fragments;
 
 
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,12 +17,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.example.thierrycouilleault.belotescore.Model.BDD.Joueur;
+import com.example.thierrycouilleault.belotescore.Model.BDD.AppDatabase;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Distributeur;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Equipe;
+import com.example.thierrycouilleault.belotescore.Model.BDD.Joueur;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Partie;
 import com.example.thierrycouilleault.belotescore.Model.BDD.SensJeu;
 import com.example.thierrycouilleault.belotescore.Model.BDD.TypeAnnonce;
@@ -38,7 +39,6 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
     private EditText et_joueur1, et_joueur2, et_joueur3, et_joueur4, et_points, et_donnes;
     private Button bt_suivant_joueurs_type_partie, bt_suivant_type_partie_distributeur, bt_commencer_partie;
     private LinearLayout ll_joueurs, ll_annonces, ll_distributeur;
-    private TextView tv_console;
     private ToggleButton tb_annonces, tb_type_partie;
     private RadioButton rb1, rb2, rb3, rb4;
     private CheckBox cb;
@@ -123,7 +123,7 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
         rgb = getActivity().findViewById(R.id.rgb);
         ctl = getActivity().findViewById(R.id.ctl);
 
-        tv_console = getActivity().findViewById(R.id.tv_console);
+
 
         //listener d'événementd
         et_points.setOnClickListener(this);
@@ -158,7 +158,7 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
         et_joueur1.requestFocus();
 
 
-        tv_console.setVisibility(View.INVISIBLE);
+
 
 
 
@@ -230,6 +230,20 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
 
         } else if (v == bt_commencer_partie) {
             //Lancement d'une partie
+
+            //Gestion de la DB
+
+            final AppDatabase db = Room.databaseBuilder(getActivity().getApplicationContext(), AppDatabase.class, "production")
+                    .allowMainThreadQueries()
+                    .build();
+
+            //MAJ des données
+            db.joueurDao().insertAll(joueur1);
+            db.joueurDao().insertAll(joueur2);
+            db.joueurDao().insertAll(joueur3);
+            db.joueurDao().insertAll(joueur4);
+
+            
 
             //lancement d'une partie avec points
             if (type.getTypeJeu() == TypeJeu.POINTS.toString()) {
