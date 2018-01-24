@@ -20,7 +20,6 @@ import android.widget.RadioGroup;
 import android.widget.ToggleButton;
 
 import com.example.thierrycouilleault.belotescore.Model.BDD.AppDatabase;
-import com.example.thierrycouilleault.belotescore.Model.BDD.Distributeur;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Equipe;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Equipes;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Joueur;
@@ -55,7 +54,7 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
     private Equipes equipes;
     private TypeDePartie type;
     private Partie partie;
-    private Distributeur premierDistributeur;
+    private Joueur premierDistributeur;
     private SensJeu sensJeu;
     private boolean sensJeuBoolean;
     private TypeAnnonce typeAnnonce;
@@ -179,7 +178,6 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
 
         //Instanciation et Initialisation des valeurs
         sensJeu = SensJeu.SENS_AIGUILLE;
-        premierDistributeur.setNomJoueur(rb1.getText().toString());
 
     }
 

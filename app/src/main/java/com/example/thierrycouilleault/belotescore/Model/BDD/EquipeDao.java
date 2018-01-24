@@ -11,7 +11,7 @@ import android.arch.persistence.room.Query;
 @Dao
 public interface EquipeDao {
 
-    @Query("SELECT * FROM equipe WHERE (joueur1 AND joueur2) OR (joueur2 AND joueur1) IN (:JoueurId1, :joueurId2)")
+    @Query("SELECT * FROM equipe WHERE (joueur1 OR joueur2) IN (:joueurId1)" + "AND (joueur1 OR joueur2) IN (:joueurId2)")
     Equipe loadEquipeByJoueursIds (int joueurId1, int joueurId2);
 
     @Insert
