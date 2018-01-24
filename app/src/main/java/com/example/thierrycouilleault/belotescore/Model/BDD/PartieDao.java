@@ -2,6 +2,9 @@ package com.example.thierrycouilleault.belotescore.Model.BDD;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.Query;
+
+import java.util.List;
 
 /**
  * Created by thierrycouilleault on 23/01/2018.
@@ -9,6 +12,12 @@ import android.arch.persistence.room.Insert;
 
 @Dao
 public interface PartieDao {
+
+    @Query("SELECT * FROM partie WHERE partieId IN (:partieId)")
+    Partie loadPartieById (int partieId);
+
+    @Query("SELECT * FROM partie")
+    List<Partie> getAllParties();
 
     @Insert
     void insertAll(Partie partie);

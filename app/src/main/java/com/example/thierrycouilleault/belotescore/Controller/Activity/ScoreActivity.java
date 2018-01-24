@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.example.thierrycouilleault.belotescore.Model.BDD.AppDatabase;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Couleur;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Donne;
+import com.example.thierrycouilleault.belotescore.Model.BDD.Partie;
+import com.example.thierrycouilleault.belotescore.Model.BDD.TypeJeu;
 import com.example.thierrycouilleault.belotescore.R;
 
 import java.util.List;
@@ -38,7 +40,7 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
     //Données
 
     public Couleur couleur;
-    public List<Donne> donnes;
+    public Partie partie;
 
 
     @Override
@@ -77,25 +79,58 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
         tv_score_equipe2.setText("0");
 
 
+
+        //Traitement du recycler view
+
+        recyclerView = findViewById(R.id.recycler_view);
+
         //Gestion de la DB
 
         final AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "production")
                 .allowMainThreadQueries()
                 .build();
 
+        //Création partie courante
+
+        List<Partie> parties =db.partieDao().getAllParties();
+
+        partie = db.partieDao().loadPartieById(parties.size());
+
+
+
+        //Affichage donnes ---> courante
+
+        List <Donne> donnes =db.donneDao().getAllDonnesPartiesCourantes(parties.size());
 
 
 
 
-        //Traitement du recycler view
-
-        recyclerView = findViewById(R.id.recycler_view);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         adapter = new PartieAdapter(donnes);
 
         recyclerView.setAdapter(adapter);
+
+
+
+
+        //gestion fin de partie
+
+        if (partie.getType().getTypeJeu() == TypeJeu.POINTS.toString()){
+
+
+
+
+
+        }else if (partie.getType().getTypeJeu() == TypeJeu.DONNES.toString()){
+
+
+
+        }
+
+
+
 
 
     }
