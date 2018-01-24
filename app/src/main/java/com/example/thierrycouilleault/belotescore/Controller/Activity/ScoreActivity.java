@@ -22,6 +22,7 @@ import com.example.thierrycouilleault.belotescore.Model.BDD.Partie;
 import com.example.thierrycouilleault.belotescore.Model.BDD.TypeJeu;
 import com.example.thierrycouilleault.belotescore.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
@@ -41,6 +42,7 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
 
     public Couleur couleur;
     public Partie partie;
+    public Donne donne;
 
 
     @Override
@@ -100,9 +102,21 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
 
         //Affichage donnes ---> courante
 
-        List <Donne> donnes =db.donneDao().getAllDonnesPartiesCourantes(parties.size());
+        List<Donne> donnes ;/*=db.donneDao().getAllDonnesPartiesCourantes(parties.size());*/
+        donnes = new ArrayList<>();
+
+        donnes = db.donneDao().getAllDonnesPartiesCourantes(parties.size()-1);
+        donne = new Donne();
 
 
+        for (int i = 0; i <10 ; i++) {
+
+            donne.setScore1(10*i);
+            donne.setScore2(162-donne.getScore1());
+
+            donnes.add(donne);
+
+        }
 
 
 

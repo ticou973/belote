@@ -34,9 +34,9 @@ class PartieAdapter extends RecyclerView.Adapter<PartieAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(PartieAdapter.ViewHolder holder, int position) {
 
-        holder.tv_score1.setText(donnes.get(position).getScore1());
-        holder.tv_score2.setText(donnes.get(position).getScore2());
-        holder.tv_numdonne.setText(donnes.get(position).getNumDonne());
+        holder.tv_score1.setText(Integer.toString(donnes.get(position).getScore1()));
+        holder.tv_score2.setText(Integer.toString(donnes.get(position).getScore2()));
+        holder.tv_numdonne.setText(Integer.toString(donnes.get(position).getNumDonne()));
     }
 
     @Override

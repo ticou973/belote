@@ -47,7 +47,8 @@ public class Donne {
 
     // constructeur
 
-
+    public Donne() {
+    }
 
 
     //getter et setter

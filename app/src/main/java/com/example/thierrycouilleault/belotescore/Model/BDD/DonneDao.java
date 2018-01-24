@@ -13,7 +13,7 @@ import java.util.List;
 @Dao
 public interface DonneDao {
 
-    @Query("SELECT * FROM donne WHERE partieId IN (:partieId)")
+    @Query("SELECT * FROM donne WHERE num_partie IN (:partieId)")
     List<Donne> getAllDonnesPartiesCourantes(int partieId);
 
 }

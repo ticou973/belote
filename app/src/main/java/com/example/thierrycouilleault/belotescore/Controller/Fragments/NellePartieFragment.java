@@ -178,6 +178,10 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
 
         //Instanciation et Initialisation des valeurs
         sensJeu = SensJeu.SENS_AIGUILLE;
+        type = new TypeDePartie();
+        premierDistributeur = new Joueur();
+
+
 
     }
 
@@ -231,7 +235,7 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
             //construction de la DB
 
             final AppDatabase db = Room.databaseBuilder(getActivity().getApplicationContext(), AppDatabase.class, "production")
-                    .allowMainThreadQueries()
+                    .allowMainThreadQueries().fallbackToDestructiveMigration()
                     .build();
 
 
@@ -264,11 +268,11 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
 
 
             //Recherche Id des équipes
-            equipeIdA = db.equipeDao().loadEquipeByJoueursIds(joueurId1, joueurId2).getEquipeId();
-            equipeIdB = db.equipeDao().loadEquipeByJoueursIds(joueurId3, joueurId4).getEquipeId();
+            equipeIdA = 1; /*db.equipeDao().loadEquipeByJoueursIds(joueurId1, joueurId2).getEquipeId();*/
+            equipeIdB = 2; /*db.equipeDao().loadEquipeByJoueursIds(joueurId3, joueurId4).getEquipeId();*/
 
 
-            //Création des Equipes (paiares d'équipes
+            //Création des Equipes (paires d'équipes
             equipes = new Equipes(equipeIdA, equipeIdB);
 
 
@@ -294,7 +298,6 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
 
                 //Remplissage du type de jeu
                 type.setNbPoints(nbPointsPartie);
-                type.setNbDonnes(Integer.parseInt(null));
 
 
                 //Création d'une nouvelle partie
@@ -312,7 +315,6 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
                 int nbDonnesPartie = Integer.parseInt(et_donnes.getText().toString());
 
                 //Remplissage du type de jeu
-                type.setNbPoints(Integer.parseInt(null));
                 type.setNbDonnes(nbDonnesPartie);
 
 
@@ -415,6 +417,7 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         if(checkedId==R.id.rb1) {
+
             premierDistributeur.setNomJoueur(rb1.getText().toString());
 
         }else if (checkedId==R.id.rb2) {

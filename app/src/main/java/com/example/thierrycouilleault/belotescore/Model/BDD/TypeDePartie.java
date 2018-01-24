@@ -11,7 +11,7 @@ public class TypeDePartie {
     private String typeJeu=TypeJeu.POINTS.toString();
     private String typeAnnonce = TypeAnnonce.SANS_ANNONCE.toString();
     private int nbPoints = 1001;
-    private int nbDonnes = Integer.parseInt(null);
+    private int nbDonnes;
 
 
     //Variables statiques

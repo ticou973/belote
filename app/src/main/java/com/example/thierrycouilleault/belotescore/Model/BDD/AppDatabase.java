@@ -9,7 +9,7 @@ import android.arch.persistence.room.TypeConverters;
  */
 
 
-@Database(entities ={Partie.class, Joueur.class, Equipes.class, Equipe.class, Donne.class }, version =1)
+@Database(entities ={Partie.class, Joueur.class, Equipes.class, Equipe.class, Donne.class }, version =2)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 
