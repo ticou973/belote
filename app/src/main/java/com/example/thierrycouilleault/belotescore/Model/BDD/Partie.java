@@ -42,6 +42,13 @@ public class Partie {
 
     //Méthodes constructeurs
 
+    public Partie(TypeDePartie type, int equipesId, Joueur premierDistributeur, boolean sensJeu) {
+        this.type = type;
+        this.equipesId = equipesId;
+        this.premierDistributeur = premierDistributeur;
+        this.sensJeu = sensJeu;
+    }
+
 
     //Autres méthodes
 
