@@ -3,6 +3,7 @@ package com.example.thierrycouilleault.belotescore.Model.BDD;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 /**
@@ -34,8 +35,6 @@ public class Partie {
     private boolean sensJeu;
 
 
-    //Variables statiques
-
 
     //Méthodes constructeurs
 
@@ -46,6 +45,11 @@ public class Partie {
         this.sensJeu = sensJeu;
     }
 
+    @Ignore
+    public Partie(TypeDePartie type, Equipes equipes) {
+        this.type = type;
+        this.equipes = equipes;
+    }
 
     //Autres méthodes
 

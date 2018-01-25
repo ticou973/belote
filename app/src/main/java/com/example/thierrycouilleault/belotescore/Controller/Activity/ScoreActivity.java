@@ -102,31 +102,6 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
 
         int pid = partie.getPartieId();
 
-
-        //Affichage des noms
-        /*equipes = new Equipes();
-        equipeA = new Equipe();
-        equipeB = new Equipe();
-
-
-        equipesId = partie.getEquipesId();
-        equipes = db.equipesDao().loadEquipesbyIds(equipesId);
-        equipeIdA = equipes.getEquipeIdA();
-        equipeIdB = equipes.getEquipeIdB();
-        equipeA = db.equipeDao().loadEquipeByEquipeId(equipeIdA);
-        equipeB = db.equipeDao().loadEquipeByEquipeId(equipeIdB);
-        joueurId1 = equipeA.getJoueur1();
-        joueurId2 = equipeA.getJoueur2();
-        joueurId3 = equipeB.getJoueur1();
-        joueurId4 = equipeB.getJoueur2();
-
-        joueur1 = new Joueur(joueurId1);
-        joueur2 = new Joueur(joueurId2);
-        joueur3 = new Joueur(joueurId3);
-        joueur4 = new Joueur(joueurId4);*/
-
-
-
         joueur1 = new Joueur();
         joueur2 = new Joueur();
         joueur3 = new Joueur();

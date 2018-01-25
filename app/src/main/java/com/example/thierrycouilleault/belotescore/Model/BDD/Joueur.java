@@ -12,8 +12,8 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity
 public class Joueur {
 
-    @PrimaryKey (autoGenerate = true)
-    private int joueurId;
+   @PrimaryKey(autoGenerate = true)
+   private int joueurId;
 
 
     @ColumnInfo(name ="nom_joueur")
@@ -30,9 +30,6 @@ public class Joueur {
 
     }
 
-    public Joueur(int joueurId) {
-        this.joueurId = joueurId;
-    }
 
     //Autres méthodes
 
@@ -41,20 +38,20 @@ public class Joueur {
     //Getter et Setter
 
 
-    public int getJoueurId() {
-        return joueurId;
-    }
-
-    public void setJoueurId(int joueurId) {
-        this.joueurId = joueurId;
-    }
-
     public String getNomJoueur() {
         return nomJoueur;
     }
 
     public void setNomJoueur(String nomJoueur) {
         this.nomJoueur = nomJoueur;
+    }
+
+    public int getJoueurId() {
+        return joueurId;
+    }
+
+    public void setJoueurId(int joueurId) {
+        this.joueurId = joueurId;
     }
 }
 

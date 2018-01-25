@@ -257,10 +257,10 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
 
             //gestion des équipes
 
-            equipeA = new Equipe("equipeA", joueur1, joueur2);
-            equipeB = new Equipe("equipeB", joueur3, joueur4);
+            equipeA = new Equipe("equipeA", joueur1.getNomJoueur(), joueur2.getNomJoueur());
+            equipeB = new Equipe("equipeB", joueur3.getNomJoueur(), joueur4.getNomJoueur());
 
-            equipes = new Equipes(equipeA, equipeB);
+            equipes = new Equipes(equipeA.getNomEquipe(), joueur1.getNomJoueur(), joueur2.getNomJoueur(), equipeB.getNomEquipe(), joueur3.getNomJoueur(), joueur4.getNomJoueur());
 
             //todo gérer la DB pour la recherche Id des joueurs
 

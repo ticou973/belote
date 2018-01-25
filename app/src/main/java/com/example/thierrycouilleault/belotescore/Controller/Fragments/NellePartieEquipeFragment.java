@@ -176,21 +176,11 @@ public class NellePartieEquipeFragment extends Fragment implements View.OnClickL
             equipeA = new Equipe("EquipeA");
             equipeB = new Equipe("EquipeB");
 
-            //Insertion des équipes
-            db.equipeDao().insertAll(equipeA);
-            db.equipeDao().insertAll(equipeB);
 
             //todo gérer les doublons
 
             //Création des Equipes (paires d'équipes)
-            equipes = new Equipes();
-
-
-
-            //Insertion des Equipes dans la BD
-
-            db.equipesDao().insertAll(equipes);
-
+            equipes = new Equipes(equipeA.getNomEquipe(), equipeB.getNomEquipe());
 
 
             //lancement d'une partie avec points
@@ -202,14 +192,6 @@ public class NellePartieEquipeFragment extends Fragment implements View.OnClickL
                 type.setNbDonnes(1000);
 
 
-                //Création d'une nouvelle partie
-                partie = new Partie(type, equipes.getEquipesId());
-
-                // Insertion partie dans la DB
-                db.partieDao().insertAll(partie);
-
-                onNellePartieEquipeFragmentListener.commencerPartie();
-
                 //lancement d'une partie avec donnes
             } else {
                 int nbDonnesPartie = Integer.parseInt(et_donnes2.getText().toString());
@@ -218,15 +200,15 @@ public class NellePartieEquipeFragment extends Fragment implements View.OnClickL
                 type.setNbPoints(10000);
                 type.setNbDonnes(nbDonnesPartie);
 
-
-                //Création d'une nouvelle partie
-                partie = new Partie(type, equipes.getEquipesId());
-
-                // Insertion partie dans la DB
-                db.partieDao().insertAll(partie);
-
-                onNellePartieEquipeFragmentListener.commencerPartie();
             }
+
+            //Création d'une nouvelle partie
+            partie = new Partie(type, equipes);
+
+            // Insertion partie dans la DB
+            db.partieDao().insertAll(partie);
+
+            onNellePartieEquipeFragmentListener.commencerPartie();
         }
     }
 
