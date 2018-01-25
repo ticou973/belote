@@ -241,6 +241,8 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
                     .build();
 
 
+            //todo gestion des doublons
+
             //Création des joueurs et des équipes
             joueur1 = new Joueur(et_joueur1.getText().toString());
             joueur2 = new Joueur(et_joueur2.getText().toString());
@@ -253,36 +255,14 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
             db.joueurDao().insertAll(joueur3);
             db.joueurDao().insertAll(joueur4);
 
-            //Recherche de l'ID des joueurs
-            joueurId1 = db.joueurDao().loadJoueurByName(joueur1.getNomJoueur()).getJoueurId();
-            joueurId2 = db.joueurDao().loadJoueurByName(joueur2.getNomJoueur()).getJoueurId();
-            joueurId3 = db.joueurDao().loadJoueurByName(joueur3.getNomJoueur()).getJoueurId();
-            joueurId4 = db.joueurDao().loadJoueurByName(joueur4.getNomJoueur()).getJoueurId();
+            //gestion des équipes
 
+            equipeA = new Equipe("equipeA", joueur1, joueur2);
+            equipeB = new Equipe("equipeB", joueur3, joueur4);
 
-            //Création des équipes
-            equipeA = new Equipe(joueurId1, joueurId2, "EquipeA");
-            equipeB = new Equipe(joueurId3, joueurId4, "EquipeB");
-
-            //Insertion des équipes
-            db.equipeDao().insertAll(equipeA);
-            db.equipeDao().insertAll(equipeB);
-
-
-            //Recherche Id des équipes
-            equipeIdA = 1; /*db.equipeDao().loadEquipeByJoueursIds(joueurId1, joueurId2).getEquipeId();*/
-            equipeIdB = 2; /*db.equipeDao().loadEquipeByJoueursIds(joueurId3, joueurId4).getEquipeId();*/
+            equipes = new Equipes(equipeA, equipeB);
 
             //todo gérer la DB pour la recherche Id des joueurs
-
-            //Création des Equipes (paires d'équipes
-            equipes = new Equipes(equipeIdA, equipeIdB);
-
-
-
-            //Insertion des Equipes dans la BD
-
-            db.equipesDao().insertAll(equipes);
 
 
             //lancement d'une partie avec points
@@ -293,17 +273,6 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
                 type.setNbPoints(nbPointsPartie);
                 type.setNbDonnes(1000);
 
-
-                //Création d'une nouvelle partie
-                partie = new Partie(type, equipes.getEquipesId(), premierDistributeur, sensJeuBoolean);
-
-                // Insertion partie dans la DB
-                db.partieDao().insertAll(partie);
-
-                onNellePartieFragmentListener.commencerPartie();
-
-
-
                 //lancement d'une partie avec donnes
             } else {
                 int nbDonnesPartie = Integer.parseInt(et_donnes.getText().toString());
@@ -312,16 +281,15 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
                 type.setNbDonnes(nbDonnesPartie);
                 type.setNbPoints(10000);
 
-
-                //Création d'une nouvelle partie
-                partie = new Partie(type, equipes.getEquipesId(), premierDistributeur, sensJeuBoolean);
-
-                // Insertion partie dans la DB
-                db.partieDao().insertAll(partie);
-
-
-                onNellePartieFragmentListener.commencerPartie();
             }
+
+            //Création d'une nouvelle partie
+            partie = new Partie(type, equipes, premierDistributeur, sensJeuBoolean);
+
+            // Insertion partie dans la DB
+            db.partieDao().insertAll(partie);
+
+            onNellePartieFragmentListener.commencerPartie();
 
         }
 

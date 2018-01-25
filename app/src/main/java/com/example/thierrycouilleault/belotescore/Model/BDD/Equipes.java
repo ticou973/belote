@@ -1,31 +1,26 @@
 package com.example.thierrycouilleault.belotescore.Model.BDD;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.Embedded;
 
 /**
  * Created by thierrycouilleault on 22/01/2018.
  */
 
-@Entity
 public class Equipes {
 
-   @PrimaryKey (autoGenerate = true)
-    private int equipesId;
+   @Embedded
+    private Equipe equipeA;
 
-   @ColumnInfo(name ="equipeA")
-    private int equipeIdA;
-
-    @ColumnInfo(name ="equipeB")
-    private int equipeIdB;
+    @Embedded
+    private Equipe equipeB;
 
 
 // Constructeurs
 
-    public Equipes(int equipeIdA, int equipeIdB) {
-        this.equipeIdA = equipeIdA;
-        this.equipeIdB = equipeIdB;
+
+    public Equipes(Equipe equipeA, Equipe equipeB) {
+        this.equipeA = equipeA;
+        this.equipeB = equipeB;
     }
 
     public Equipes(){
@@ -37,27 +32,19 @@ public class Equipes {
     //Getter et setter
 
 
-    public int getEquipesId() {
-        return equipesId;
+    public Equipe getEquipeA() {
+        return equipeA;
     }
 
-    public void setEquipesId(int equipesId) {
-        this.equipesId = equipesId;
+    public void setEquipeA(Equipe equipeA) {
+        this.equipeA = equipeA;
     }
 
-    public int getEquipeIdA() {
-        return equipeIdA;
+    public Equipe getEquipeB() {
+        return equipeB;
     }
 
-    public void setEquipeIdA(int equipeIdA) {
-        this.equipeIdA = equipeIdA;
-    }
-
-    public int getEquipeIdB() {
-        return equipeIdB;
-    }
-
-    public void setEquipeIdB(int equipeIdB) {
-        this.equipeIdB = equipeIdB;
+    public void setEquipeB(Equipe equipeB) {
+        this.equipeB = equipeB;
     }
 }

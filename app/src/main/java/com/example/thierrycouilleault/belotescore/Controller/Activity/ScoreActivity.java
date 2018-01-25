@@ -18,6 +18,9 @@ import android.widget.TextView;
 import com.example.thierrycouilleault.belotescore.Model.BDD.AppDatabase;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Couleur;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Donne;
+import com.example.thierrycouilleault.belotescore.Model.BDD.Equipe;
+import com.example.thierrycouilleault.belotescore.Model.BDD.Equipes;
+import com.example.thierrycouilleault.belotescore.Model.BDD.Joueur;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Partie;
 import com.example.thierrycouilleault.belotescore.Model.BDD.TypeJeu;
 import com.example.thierrycouilleault.belotescore.R;
@@ -43,6 +46,11 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
     public Couleur couleur;
     public Partie partie;
     public Donne donne;
+    public Joueur joueur1, joueur2, joueur3, joueur4;
+    public int equipesId, equipeIdA, equipeIdB, joueurId1, joueurId2, joueurId3, joueurId4;
+    public Equipes equipes;
+    public Equipe equipeA, equipeB;
+    public List<Joueur> joueurs;
 
 
     @Override
@@ -72,14 +80,6 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
         rgb2 = findViewById(R.id.rgb2);
         rgb2.setOnCheckedChangeListener(this);
 
-        //initialisation des composants graphiques
-        tv_joueur1.setText("joueurs1");
-        tv_joueur2.setText("joueurs2");
-        tv_joueur3.setText("joueurs3");
-        tv_joueur4.setText("joueurs4");
-        tv_score_equipe1.setText("0");
-        tv_score_equipe2.setText("0");
-
 
 
         //Traitement du recycler view
@@ -92,6 +92,8 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
                 .allowMainThreadQueries()
                 .build();
 
+
+
         //Création partie courante
 
         List<Partie> parties =db.partieDao().getAllParties();
@@ -102,6 +104,48 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
 
 
         //Affichage des noms
+        /*equipes = new Equipes();
+        equipeA = new Equipe();
+        equipeB = new Equipe();
+
+
+        equipesId = partie.getEquipesId();
+        equipes = db.equipesDao().loadEquipesbyIds(equipesId);
+        equipeIdA = equipes.getEquipeIdA();
+        equipeIdB = equipes.getEquipeIdB();
+        equipeA = db.equipeDao().loadEquipeByEquipeId(equipeIdA);
+        equipeB = db.equipeDao().loadEquipeByEquipeId(equipeIdB);
+        joueurId1 = equipeA.getJoueur1();
+        joueurId2 = equipeA.getJoueur2();
+        joueurId3 = equipeB.getJoueur1();
+        joueurId4 = equipeB.getJoueur2();
+
+        joueur1 = new Joueur(joueurId1);
+        joueur2 = new Joueur(joueurId2);
+        joueur3 = new Joueur(joueurId3);
+        joueur4 = new Joueur(joueurId4);*/
+
+
+
+        joueur1 = new Joueur();
+        joueur2 = new Joueur();
+        joueur3 = new Joueur();
+        joueur4 = new Joueur();
+
+        joueurs = db.joueurDao().getAllJoueurs();
+
+        joueur1 = db.joueurDao().loadJoueurById(joueurs.size()-3);
+        joueur2 = db.joueurDao().loadJoueurById(joueurs.size()-2);
+        joueur3 = db.joueurDao().loadJoueurById(joueurs.size()-1);
+        joueur4 = db.joueurDao().loadJoueurById(joueurs.size());
+
+
+        tv_joueur1.setText(joueur1.getNomJoueur());
+        tv_joueur2.setText(joueur2.getNomJoueur());
+        tv_joueur3.setText(joueur3.getNomJoueur());
+        tv_joueur4.setText(joueur4.getNomJoueur());
+        tv_score_equipe1.setText("0");
+        tv_score_equipe2.setText("0");
 
 
 

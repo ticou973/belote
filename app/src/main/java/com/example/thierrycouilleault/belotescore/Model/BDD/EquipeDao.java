@@ -14,6 +14,9 @@ public interface EquipeDao {
     @Query("SELECT * FROM equipe WHERE (joueur1 OR joueur2) IN (:joueurId1)" + "AND (joueur1 OR joueur2) IN (:joueurId2)")
     Equipe loadEquipeByJoueursIds (int joueurId1, int joueurId2);
 
+    @Query("SELECT * FROM equipe WHERE equipeId IN (:equipeId)")
+    Equipe loadEquipeByEquipeId (int equipeId);
+
     @Insert
     void insertAll(Equipe equipe);
 }

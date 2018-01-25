@@ -30,6 +30,10 @@ public class Joueur {
 
     }
 
+    public Joueur(int joueurId) {
+        this.joueurId = joueurId;
+    }
+
     //Autres méthodes
 
 

@@ -3,7 +3,6 @@ package com.example.thierrycouilleault.belotescore.Model.BDD;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 /**
@@ -24,8 +23,8 @@ public class Partie {
     private TypeDePartie type;
 
 
-    @ColumnInfo(name = "equipes")
-    private int equipesId;
+    @Embedded
+    private Equipes equipes;
 
 
     @Embedded
@@ -40,18 +39,13 @@ public class Partie {
 
     //Méthodes constructeurs
 
-    public Partie(TypeDePartie type, int equipesId, Joueur premierDistributeur, boolean sensJeu) {
+    public Partie(TypeDePartie type, Equipes equipes, Joueur premierDistributeur, boolean sensJeu) {
         this.type = type;
-        this.equipesId = equipesId;
+        this.equipes = equipes;
         this.premierDistributeur = premierDistributeur;
         this.sensJeu = sensJeu;
     }
 
-    @Ignore
-    public Partie(TypeDePartie type, int equipesId) {
-        this.type = type;
-        this.equipesId = equipesId;
-    }
 
     //Autres méthodes
 
@@ -76,12 +70,12 @@ public class Partie {
         this.type = type;
     }
 
-    public int getEquipesId() {
-        return equipesId;
+    public Equipes getEquipes() {
+        return equipes;
     }
 
-    public void setEquipesId(int equipesId) {
-        this.equipesId = equipesId;
+    public void setEquipes(Equipes equipes) {
+        this.equipes = equipes;
     }
 
     public Joueur getPremierDistributeur() {
