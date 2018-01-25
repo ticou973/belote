@@ -76,6 +76,8 @@ public class NellePartieEquipeFragment extends Fragment implements View.OnClickL
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+        //Todo voir comment à ce niveau faire un seul fragment avec 2 xml différents.
+
         View view =inflater.inflate(R.layout.fragment_nelle_partie_equipe, container, false);
 
         return view;
@@ -128,8 +130,18 @@ public class NellePartieEquipeFragment extends Fragment implements View.OnClickL
 
         verfieNomsDifferents(nomEquipe1, nomEquipe2);
 
+        //Instanciation et Initialisation des valeurs
+        typeAnnonce =TypeAnnonce.SANS_ANNONCE;
+        typeJeu = TypeJeu.POINTS;
+        type = new TypeDePartie(typeJeu.toString(), typeAnnonce.toString(), 1001, 1000);
+
+
 
     }
+
+
+
+
 
 
     //Méthode lorsque l'on clique sur les EditText ou boutons
@@ -170,7 +182,7 @@ public class NellePartieEquipeFragment extends Fragment implements View.OnClickL
 
             //todo gérer les doublons
 
-            //Création des Equipes (paires d'équipes
+            //Création des Equipes (paires d'équipes)
             equipes = new Equipes();
 
 
@@ -187,7 +199,7 @@ public class NellePartieEquipeFragment extends Fragment implements View.OnClickL
 
                 //Remplissage du type de jeu
                 type.setNbPoints(nbPointsPartie);
-                type.setNbDonnes(Integer.parseInt(null));
+                type.setNbDonnes(1000);
 
 
                 //Création d'une nouvelle partie
@@ -203,7 +215,7 @@ public class NellePartieEquipeFragment extends Fragment implements View.OnClickL
                 int nbDonnesPartie = Integer.parseInt(et_donnes2.getText().toString());
 
                 //Remplissage du type de jeu
-                type.setNbPoints(Integer.parseInt(null));
+                type.setNbPoints(10000);
                 type.setNbDonnes(nbDonnesPartie);
 
 

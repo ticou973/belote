@@ -178,9 +178,11 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
 
         //Instanciation et Initialisation des valeurs
         sensJeu = SensJeu.SENS_AIGUILLE;
-        type = new TypeDePartie();
-        premierDistributeur = new Joueur();
-
+        sensJeuBoolean = true;
+        typeAnnonce =TypeAnnonce.SANS_ANNONCE;
+        typeJeu = TypeJeu.POINTS;
+        type = new TypeDePartie(typeJeu.toString(), typeAnnonce.toString(), 1001, 1000);
+        premierDistributeur = new Joueur(rb1.getText().toString());
 
 
     }
@@ -271,6 +273,7 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
             equipeIdA = 1; /*db.equipeDao().loadEquipeByJoueursIds(joueurId1, joueurId2).getEquipeId();*/
             equipeIdB = 2; /*db.equipeDao().loadEquipeByJoueursIds(joueurId3, joueurId4).getEquipeId();*/
 
+            //todo gérer la DB pour la recherche Id des joueurs
 
             //Création des Equipes (paires d'équipes
             equipes = new Equipes(equipeIdA, equipeIdB);
@@ -282,22 +285,13 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
             db.equipesDao().insertAll(equipes);
 
 
-            //Convertir Sens jeu en boolean
-            if (sensJeu == SensJeu.SENS_AIGUILLE) {
-                sensJeuBoolean = true;
-
-            }else if (sensJeu == SensJeu.SENS_INVERSE_AIGUILLE) {
-                sensJeuBoolean = false;
-
-            }
-
-
             //lancement d'une partie avec points
             if (type.getTypeJeu() == TypeJeu.POINTS.toString()) {
                 int nbPointsPartie = Integer.parseInt(et_points.getText().toString());
 
                 //Remplissage du type de jeu
                 type.setNbPoints(nbPointsPartie);
+                type.setNbDonnes(1000);
 
 
                 //Création d'une nouvelle partie
@@ -316,6 +310,7 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
 
                 //Remplissage du type de jeu
                 type.setNbDonnes(nbDonnesPartie);
+                type.setNbPoints(10000);
 
 
                 //Création d'une nouvelle partie
@@ -391,6 +386,7 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
 
             } else if (buttonView==cb) {
                 sensJeu =SensJeu.SENS_AIGUILLE;
+                sensJeuBoolean = true;
             }
 
         } else {
@@ -407,6 +403,7 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
 
             } else if(buttonView==cb){
                 sensJeu = SensJeu.SENS_INVERSE_AIGUILLE;
+                sensJeuBoolean =false;
             }
         }
     }

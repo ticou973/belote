@@ -24,6 +24,12 @@ public class TypeDePartie {
 
     }
 
+    public TypeDePartie(String typeJeu, String typeAnnonce, int nbPoints, int nbDonnes) {
+        this.typeJeu = typeJeu;
+        this.typeAnnonce = typeAnnonce;
+        this.nbPoints = nbPoints;
+        this.nbDonnes = nbDonnes;
+    }
 
     //Autres méthodes
 

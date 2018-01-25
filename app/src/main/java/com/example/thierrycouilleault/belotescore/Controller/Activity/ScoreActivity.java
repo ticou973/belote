@@ -98,6 +98,11 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
 
         partie = db.partieDao().loadPartieById(parties.size());
 
+        int pid = partie.getPartieId();
+
+
+        //Affichage des noms
+
 
 
         //Affichage donnes ---> courante
@@ -105,14 +110,17 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
         List<Donne> donnes ;/*=db.donneDao().getAllDonnesPartiesCourantes(parties.size());*/
         donnes = new ArrayList<>();
 
-        donnes = db.donneDao().getAllDonnesPartiesCourantes(parties.size()-1);
-        donne = new Donne();
+        donnes = db.donneDao().getAllDonnesPartiesCourantes(parties.size());
+
 
 
         for (int i = 0; i <10 ; i++) {
 
-            donne.setScore1(10*i);
-            donne.setScore2(162-donne.getScore1());
+            donne = new Donne();
+
+            donne.setScore1(pid);
+            donne.setScore2(162);
+            donne.setNumDonne(i+1);
 
             donnes.add(donne);
 
@@ -142,10 +150,6 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
 
 
         }
-
-
-
-
 
     }
 
