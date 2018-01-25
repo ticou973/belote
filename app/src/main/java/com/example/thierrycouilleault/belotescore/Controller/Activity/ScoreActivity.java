@@ -114,6 +114,9 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
         joueur3 = db.joueurDao().loadJoueurById(joueurs.size()-1);
         joueur4 = db.joueurDao().loadJoueurById(joueurs.size());
 
+        //calcul score
+        
+
 
         tv_joueur1.setText(joueur1.getNomJoueur());
         tv_joueur2.setText(joueur2.getNomJoueur());
