@@ -47,13 +47,11 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
     public Donne donne;
     public List<Donne> donnes;
     public Joueur joueur1, joueur2, joueur3, joueur4;
-    public int equipesId, equipeIdA, equipeIdB, joueurId1, joueurId2, joueurId3, joueurId4;
+    public int scoreTotalEquipe1, scoreTotalEquipe2;
     public Equipes equipes;
     public Equipe equipeA, equipeB;
     public List<Joueur> joueurs;
     public List<Partie> parties;
-
-
 
 
 
@@ -115,7 +113,6 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
         joueur3 = db.joueurDao().loadJoueurById(joueurs.size()-1);
         joueur4 = db.joueurDao().loadJoueurById(joueurs.size());
 
-        //calcul score total
 
 
         //Affichage des noms
@@ -123,8 +120,7 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
         tv_joueur2.setText(joueur2.getNomJoueur());
         tv_joueur3.setText(joueur3.getNomJoueur());
         tv_joueur4.setText(joueur4.getNomJoueur());
-        tv_score_equipe1.setText(Integer.toString(partie.getScoreEquipeA()));
-        tv_score_equipe2.setText(Integer.toString(partie.getScoreEquipeB()));
+
 
 
 
@@ -139,6 +135,17 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
         recyclerView.setAdapter(adapter);
 
 
+        //calcul et affichage score total
+
+        for (Donne donne: donnes) {
+
+            scoreTotalEquipe1 += donne.getScore1();
+            scoreTotalEquipe2 += donne.getScore2();
+        }
+
+
+        tv_score_equipe1.setText(Integer.toString(scoreTotalEquipe1));
+        tv_score_equipe2.setText(Integer.toString(scoreTotalEquipe2));
 
 
         //gestion fin de partie
@@ -150,8 +157,6 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
 
 
         }else if (partie.getType().getTypeJeu() == TypeJeu.DONNES.toString()){
-
-
 
         }
 
