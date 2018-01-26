@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.thierrycouilleault.belotescore.Model.BDD.AppDatabase;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Couleur;
@@ -22,7 +23,6 @@ import com.example.thierrycouilleault.belotescore.Model.BDD.Equipe;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Equipes;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Joueur;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Partie;
-import com.example.thierrycouilleault.belotescore.Model.BDD.TypeJeu;
 import com.example.thierrycouilleault.belotescore.R;
 
 import java.util.List;
@@ -141,24 +141,32 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
 
             scoreTotalEquipe1 += donne.getScore1();
             scoreTotalEquipe2 += donne.getScore2();
+
         }
 
 
         tv_score_equipe1.setText(Integer.toString(scoreTotalEquipe1));
         tv_score_equipe2.setText(Integer.toString(scoreTotalEquipe2));
 
+        //Update DB pour Partie
+
+        partie.setScoreEquipeA(scoreTotalEquipe1);
+        partie.setScoreEquipeB(scoreTotalEquipe2);
+
 
         //gestion fin de partie
 
-        if (partie.getType().getTypeJeu() == TypeJeu.POINTS.toString()){
+        if ((scoreTotalEquipe1>= partie.getType().getNbPoints()) || (scoreTotalEquipe2) >= partie.getType().getNbPoints() || (donnes.size() == partie.getType().getNbDonnes())) {
 
-
-
-
-
-        }else if (partie.getType().getTypeJeu() == TypeJeu.DONNES.toString()){
+                partie.setPartieterminee(true);
+                fab_ajout_donne.setVisibility(View.INVISIBLE);
+                Toast.makeText(this, "La partie est terminée", Toast.LENGTH_SHORT).show();
 
         }
+
+
+
+        db.partieDao().updatePartie(partie);
 
     }
 
