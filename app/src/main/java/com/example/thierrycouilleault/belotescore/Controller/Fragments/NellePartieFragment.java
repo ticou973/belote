@@ -50,7 +50,6 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
     private Joueur joueur1, joueur2, joueur3, joueur4;
     private int joueurId1, joueurId2, joueurId3, joueurId4;
     private Equipe equipeA, equipeB;
-    private int equipeIdA, equipeIdB;
     private Equipes equipes;
     private TypeDePartie type;
     private Partie partie;
@@ -288,7 +287,7 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
             }
 
             //Création d'une nouvelle partie
-            partie = new Partie(type, equipes, premierDistributeur, sensJeuBoolean);
+            partie = new Partie(type, equipes, premierDistributeur, sensJeuBoolean, 60, 23, false);
 
             // Insertion partie dans la DB
             db.partieDao().insertAll(partie);

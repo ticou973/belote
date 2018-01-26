@@ -34,21 +34,36 @@ public class Partie {
     @ColumnInfo(name ="sens_jeu")
     private boolean sensJeu;
 
+    @ColumnInfo(name ="score_equipeA")
+    private int scoreEquipeA;
+
+    @ColumnInfo(name="score_equipeB")
+    private int scoreEquipeB;
+
+    @ColumnInfo(name="etat_partie")
+    private boolean partieterminee;
+
 
 
     //Méthodes constructeurs
 
-    public Partie(TypeDePartie type, Equipes equipes, Joueur premierDistributeur, boolean sensJeu) {
+    public Partie(TypeDePartie type, Equipes equipes, Joueur premierDistributeur, boolean sensJeu, int scoreEquipeA, int scoreEquipeB, boolean partieterminee) {
         this.type = type;
         this.equipes = equipes;
         this.premierDistributeur = premierDistributeur;
         this.sensJeu = sensJeu;
+        this.scoreEquipeA = scoreEquipeA;
+        this.scoreEquipeB = scoreEquipeB;
+        this.partieterminee = partieterminee;
     }
 
     @Ignore
-    public Partie(TypeDePartie type, Equipes equipes) {
+    public Partie(TypeDePartie type, Equipes equipes, int scoreEquipeA, int scoreEquipeB, boolean partieterminee) {
         this.type = type;
         this.equipes = equipes;
+        this.scoreEquipeA = scoreEquipeA;
+        this.scoreEquipeB = scoreEquipeB;
+        this.partieterminee = partieterminee;
     }
 
     //Autres méthodes
@@ -96,5 +111,29 @@ public class Partie {
 
     public void setSensJeu(boolean sensJeu) {
         this.sensJeu = sensJeu;
+    }
+
+    public int getScoreEquipeA() {
+        return scoreEquipeA;
+    }
+
+    public void setScoreEquipeA(int scoreEquipeA) {
+        this.scoreEquipeA = scoreEquipeA;
+    }
+
+    public int getScoreEquipeB() {
+        return scoreEquipeB;
+    }
+
+    public void setScoreEquipeB(int scoreEquipeB) {
+        this.scoreEquipeB = scoreEquipeB;
+    }
+
+    public boolean isPartieterminee() {
+        return partieterminee;
+    }
+
+    public void setPartieterminee(boolean partieterminee) {
+        this.partieterminee = partieterminee;
     }
 }

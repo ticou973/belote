@@ -203,7 +203,7 @@ public class NellePartieEquipeFragment extends Fragment implements View.OnClickL
             }
 
             //Création d'une nouvelle partie
-            partie = new Partie(type, equipes);
+            partie = new Partie(type, equipes,0,0,true);
 
             // Insertion partie dans la DB
             db.partieDao().insertAll(partie);

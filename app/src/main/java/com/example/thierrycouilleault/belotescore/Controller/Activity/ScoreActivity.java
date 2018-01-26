@@ -115,15 +115,15 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
         joueur4 = db.joueurDao().loadJoueurById(joueurs.size());
 
         //calcul score
-        
+
 
 
         tv_joueur1.setText(joueur1.getNomJoueur());
         tv_joueur2.setText(joueur2.getNomJoueur());
         tv_joueur3.setText(joueur3.getNomJoueur());
         tv_joueur4.setText(joueur4.getNomJoueur());
-        tv_score_equipe1.setText("0");
-        tv_score_equipe2.setText("0");
+        tv_score_equipe1.setText(Integer.toString(partie.getScoreEquipeA()));
+        tv_score_equipe2.setText(Integer.toString(partie.getScoreEquipeB()));
 
 
 
@@ -213,6 +213,9 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+        //todo bouger dans table score activity
+
         if(checkedId==R.id.rb_trefle) {
             couleur=Couleur.TREFLE;
 
