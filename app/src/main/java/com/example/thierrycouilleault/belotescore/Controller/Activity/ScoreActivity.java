@@ -103,8 +103,6 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
 
         partie = db.partieDao().loadPartieById(parties.size());
 
-        int pid = partie.getPartieId();
-
         joueur1 = new Joueur();
         joueur2 = new Joueur();
         joueur3 = new Joueur();
@@ -117,10 +115,10 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
         joueur3 = db.joueurDao().loadJoueurById(joueurs.size()-1);
         joueur4 = db.joueurDao().loadJoueurById(joueurs.size());
 
-        //calcul score
+        //calcul score total
 
 
-
+        //Affichage des noms
         tv_joueur1.setText(joueur1.getNomJoueur());
         tv_joueur2.setText(joueur2.getNomJoueur());
         tv_joueur3.setText(joueur3.getNomJoueur());
@@ -130,24 +128,9 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
 
 
 
-        //Affichage donnes ---> courante
+        //Affichage donnes
 
         donnes = db.donneDao().getAllDonnesPartiesCourantes(parties.size());
-
-
-        for (int i = 0; i <10 ; i++) {
-
-            donne = new Donne();
-
-            donne.setScore1(pid);
-            donne.setScore2(162);
-            donne.setNumDonne(i+1);
-
-            donnes.add(donne);
-
-        }
-
-
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -240,7 +223,8 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
                     .allowMainThreadQueries()
                     .build();
 
-                donne = new Donne(partie.getPartieId(), donnes.size(), couleur);
+
+            donne = new Donne(partie.getPartieId(), donnes.size()+1, couleur);
 
                 db.donneDao().insertAll(donne);
 

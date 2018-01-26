@@ -259,7 +259,7 @@ public class TableScoreActivity extends AppCompatActivity implements RadioGroup.
              donne.setCapot(capot);
              donne.setScore1(scoreTotalEquipe1);
              donne.setScore2(scoreTotalEquipe2);
-             
+
              db.donneDao().updateDonne(donne);
 
 
