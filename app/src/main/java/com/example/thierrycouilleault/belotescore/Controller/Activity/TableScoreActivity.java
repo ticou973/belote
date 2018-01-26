@@ -1,5 +1,6 @@
 package com.example.thierrycouilleault.belotescore.Controller.Activity;
 
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -16,6 +17,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.example.thierrycouilleault.belotescore.Model.BDD.AppDatabase;
 import com.example.thierrycouilleault.belotescore.R;
 
 public class TableScoreActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener, TextWatcher, View.OnTouchListener {
@@ -111,6 +113,15 @@ public class TableScoreActivity extends AppCompatActivity implements RadioGroup.
 
         bt_validation.setVisibility(View.INVISIBLE);
         bt_validation.setEnabled(false);
+
+
+        //Gestion de la DB
+
+        final AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "production")
+                .allowMainThreadQueries()
+                .build();
+
+        
 
 
     }

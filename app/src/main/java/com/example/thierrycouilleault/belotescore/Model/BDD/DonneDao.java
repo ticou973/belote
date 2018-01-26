@@ -1,6 +1,7 @@
 package com.example.thierrycouilleault.belotescore.Model.BDD;
 
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
 import java.util.List;
@@ -15,5 +16,8 @@ public interface DonneDao {
 
     @Query("SELECT * FROM donne WHERE num_partie IN (:partieId)")
     List<Donne> getAllDonnesPartiesCourantes(int partieId);
+
+    @Insert
+    void insertAll(Donne donne);
 
 }

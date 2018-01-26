@@ -25,7 +25,6 @@ import com.example.thierrycouilleault.belotescore.Model.BDD.Partie;
 import com.example.thierrycouilleault.belotescore.Model.BDD.TypeJeu;
 import com.example.thierrycouilleault.belotescore.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
@@ -46,11 +45,15 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
     public Couleur couleur;
     public Partie partie;
     public Donne donne;
+    public List<Donne> donnes;
     public Joueur joueur1, joueur2, joueur3, joueur4;
     public int equipesId, equipeIdA, equipeIdB, joueurId1, joueurId2, joueurId3, joueurId4;
     public Equipes equipes;
     public Equipe equipeA, equipeB;
     public List<Joueur> joueurs;
+
+
+
 
 
     @Override
@@ -86,13 +89,12 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
 
         recyclerView = findViewById(R.id.recycler_view);
 
+
         //Gestion de la DB
 
         final AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "production")
                 .allowMainThreadQueries()
                 .build();
-
-
 
         //Création partie courante
 
@@ -129,11 +131,7 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
 
         //Affichage donnes ---> courante
 
-        List<Donne> donnes ;/*=db.donneDao().getAllDonnesPartiesCourantes(parties.size());*/
-        donnes = new ArrayList<>();
-
         donnes = db.donneDao().getAllDonnesPartiesCourantes(parties.size());
-
 
 
         for (int i = 0; i <10 ; i++) {
@@ -234,6 +232,17 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
     @Override
     public void onClick(View v) {
         if (v==fab_ajout_donne){
+
+            //Gestion de la DB
+
+            final AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "production")
+                    .allowMainThreadQueries()
+                    .build();
+
+                donne = new Donne(partie.getPartieId(), donnes.size(), couleur);
+
+                db.donneDao().insertAll(donne);
+
             Intent intent2 = new Intent(this, TableScoreActivity.class);
 
             startActivity(intent2);
