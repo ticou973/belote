@@ -18,7 +18,12 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.thierrycouilleault.belotescore.Model.BDD.AppDatabase;
+import com.example.thierrycouilleault.belotescore.Model.BDD.Couleur;
+import com.example.thierrycouilleault.belotescore.Model.BDD.Donne;
+import com.example.thierrycouilleault.belotescore.Model.BDD.Joueur;
 import com.example.thierrycouilleault.belotescore.R;
+
+import java.util.List;
 
 public class TableScoreActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener, TextWatcher, View.OnTouchListener {
 
@@ -40,6 +45,12 @@ public class TableScoreActivity extends AppCompatActivity implements RadioGroup.
     public Integer scoreTotalEquipe1 =new Integer(0);
     public Integer scoreTotalEquipe2 = new Integer(0);
     public int scoreDonneEquipe1, scoreDonneEquipe2, scoreExtraEquipe1, scoreExtraEquipe2;
+    public List<Donne> donnes;
+    public Donne donne;
+    public Joueur joueur1, joueur2, joueur3, joueur4, preneur;
+    public List<Joueur> joueurs;
+    public boolean capot, belote;
+    public Couleur couleur;
 
 
 
@@ -121,7 +132,40 @@ public class TableScoreActivity extends AppCompatActivity implements RadioGroup.
                 .allowMainThreadQueries()
                 .build();
 
-        
+        //Création donne courante
+
+        donnes =db.donneDao().getAllDonnes();
+
+        donne = db.donneDao().loadDonneById(donnes.size());
+
+        joueur1 = new Joueur();
+        joueur2 = new Joueur();
+        joueur3 = new Joueur();
+        joueur4 = new Joueur();
+
+        joueurs = db.joueurDao().getAllJoueurs();
+
+        joueur1 = db.joueurDao().loadJoueurById(joueurs.size()-3);
+        joueur2 = db.joueurDao().loadJoueurById(joueurs.size()-2);
+        joueur3 = db.joueurDao().loadJoueurById(joueurs.size()-1);
+        joueur4 = db.joueurDao().loadJoueurById(joueurs.size());
+
+        couleur = donne.getCouleur();
+
+        //affichage des noms
+
+       rb2_joueur1.setText(joueur1.getNomJoueur());
+       rb2_joueur2.setText(joueur2.getNomJoueur());
+       rb2_joueur3.setText(joueur3.getNomJoueur());
+       rb2_joueur4.setText(joueur4.getNomJoueur());
+       rb_belote_equipe1.setText(joueur1.getNomJoueur()+ " " + joueur2.getNomJoueur());
+       rb_capot_equipe1.setText(joueur1.getNomJoueur()+ " " + joueur2.getNomJoueur());
+       rb_belote_equipe2.setText(joueur3.getNomJoueur()+ " " + joueur4.getNomJoueur());
+       rb_capot_equipe2.setText(joueur3.getNomJoueur()+ " " + joueur4.getNomJoueur());
+
+       //Initialisation des données
+        capot = false;
+        belote = false;
 
 
     }
@@ -137,6 +181,20 @@ public class TableScoreActivity extends AppCompatActivity implements RadioGroup.
             rg_belote.setVisibility(View.VISIBLE);
             rg_capot.setVisibility(View.VISIBLE);
 
+            if (checkedId==R.id.rb2_joueur1){
+                preneur = joueur1;
+
+            }else if (checkedId==R.id.rb2_joueur2){
+                preneur = joueur2;
+
+            }else if (checkedId==R.id.rb2_joueur3){
+                preneur = joueur3;
+
+            }else if (checkedId==R.id.rb2_joueur4){
+                preneur = joueur4;
+
+            }
+
 
         }else if(group==rg_capot){
 
@@ -148,6 +206,12 @@ public class TableScoreActivity extends AppCompatActivity implements RadioGroup.
             et_score_equipe1.setEnabled(false);
             et_score_equipe2.setEnabled(false);
 
+            if (rb_capot_equipe1.isChecked()||rb_capot_equipe2.isChecked()){
+                capot = true;
+            }else{
+                capot = false;
+            }
+
             if (checkedId==R.id.rb2_equipe1){
                 et_score_equipe1.setText("252");
                 et_score_equipe2.setText("0");
@@ -158,13 +222,16 @@ public class TableScoreActivity extends AppCompatActivity implements RadioGroup.
 
             }
 
-
-
-
         }else if(group==rg_belote){
             calculScoreDonne();
             tv_score_equipe1.setText(Integer.toString(scoreTotalEquipe1));
             tv_score_equipe2.setText(Integer.toString(scoreTotalEquipe2));
+
+            if (rb_belote_equipe1.isChecked()||rb_belote_equipe2.isChecked()){
+                belote = true;
+            }else{
+                belote = false;
+            }
 
 
         }
@@ -180,6 +247,20 @@ public class TableScoreActivity extends AppCompatActivity implements RadioGroup.
             Intent intent3 = new Intent(this, ScoreActivity.class);
             startActivity(intent3);
         }else if(v==bt_validation){
+
+             //Gestion de la DB
+
+             final AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "production")
+                     .allowMainThreadQueries()
+                     .build();
+
+             donne.setPreneur(preneur);
+             donne.setBelote(belote);
+             donne.setCapot(capot);
+             donne.setScore1(scoreTotalEquipe1);
+             donne.setScore2(scoreTotalEquipe2);
+             
+             db.donneDao().updateDonne(donne);
 
 
              Intent intent3 = new Intent(this, ScoreActivity.class);
@@ -328,7 +409,7 @@ public class TableScoreActivity extends AppCompatActivity implements RadioGroup.
 
               }
 
-              //Todo gérer l'arrêt d'affichage pour supérieur à 162. Voi avec le Keyboard ?
+              //Todo gérer l'arrêt d'affichage pour supérieur à 162. Voir avec le Keyboard ?
 
     }
 
@@ -347,11 +428,9 @@ public class TableScoreActivity extends AppCompatActivity implements RadioGroup.
             et_score_equipe1.addTextChangedListener(this);
 
 
-
         }else if (v==et_score_equipe2){
 
             et_score_equipe2.addTextChangedListener(this);
-
 
 
         }

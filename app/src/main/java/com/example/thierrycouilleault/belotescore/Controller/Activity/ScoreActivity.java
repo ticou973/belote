@@ -51,6 +51,7 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
     public Equipes equipes;
     public Equipe equipeA, equipeB;
     public List<Joueur> joueurs;
+    public List<Partie> parties;
 
 
 
@@ -98,7 +99,7 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
 
         //Création partie courante
 
-        List<Partie> parties =db.partieDao().getAllParties();
+        parties =db.partieDao().getAllParties();
 
         partie = db.partieDao().loadPartieById(parties.size());
 
