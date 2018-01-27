@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.thierrycouilleault.belotescore.Controller.Fragments.GagnantDialogFragment;
 import com.example.thierrycouilleault.belotescore.Model.BDD.AppDatabase;
@@ -45,7 +44,7 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
     //Données
 
     public Couleur couleur;
-    public Partie partie;
+    public Partie partie, partie2;
     public Donne donne;
     public List<Donne> donnes;
     public Joueur joueur1, joueur2, joueur3, joueur4;
@@ -163,20 +162,15 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
                 partie.setPartieterminee(true);
                 fab_ajout_donne.setVisibility(View.INVISIBLE);
 
-                if (scoreTotalEquipe1>scoreTotalEquipe2){
-                    Toast.makeText(this, "La partie est terminée ! L'équipe 1 a gagné !", Toast.LENGTH_LONG).show();
-                    showNoticeDialog();
+                db.partieDao().updatePartie(partie);
+
+                showNoticeDialog();
 
 
-                }else{
-                    Toast.makeText(this, "La partie est terminée ! L'équipe 2 a gagné !", Toast.LENGTH_LONG).show();
-                   showNoticeDialog();
-
-                }
-        }
+        }else{db.partieDao().updatePartie(partie);}
 
 
-        db.partieDao().updatePartie(partie);
+
 
 
     }
@@ -270,7 +264,20 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
 
-        Intent intent = new Intent(this, MainActivity.class);
+        //Gestion de la DB
+
+        final AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "production")
+                .allowMainThreadQueries()
+                .build();
+
+        partie2 = new Partie(partie.getType(), partie.getEquipes(), partie.getPremierDistributeur(), partie.isSensJeu(),0,0, false);
+
+
+        // Insertion partie dans la DB
+        db.partieDao().insertAll(partie2);
+
+
+        Intent intent = new Intent(this, ScoreActivity.class);
         startActivity(intent);
 
     }

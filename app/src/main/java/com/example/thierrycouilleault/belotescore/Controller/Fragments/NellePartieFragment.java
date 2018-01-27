@@ -287,7 +287,7 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
             }
 
             //Création d'une nouvelle partie
-            partie = new Partie(type, equipes, premierDistributeur, sensJeuBoolean, 60, 23, false);
+            partie = new Partie(type, equipes, premierDistributeur, sensJeuBoolean, 0, 0, false);
 
             // Insertion partie dans la DB
             db.partieDao().insertAll(partie);

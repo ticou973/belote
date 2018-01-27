@@ -1,6 +1,7 @@
 package com.example.thierrycouilleault.belotescore.Controller.Fragments;
 
 import android.app.Dialog;
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -9,7 +10,11 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 
+import com.example.thierrycouilleault.belotescore.Model.BDD.AppDatabase;
+import com.example.thierrycouilleault.belotescore.Model.BDD.Partie;
 import com.example.thierrycouilleault.belotescore.R;
+
+import java.util.List;
 
 /**
  * Created by thierrycouilleault on 26/01/2018.
@@ -20,7 +25,9 @@ public class GagnantDialogFragment extends DialogFragment {
     //Données graphiques
 
     public TextView tv_gagnant;
-    public String gagnant;
+    public List<Partie> parties;
+    public Partie partie;
+    public String message1, message2;
 
 
     public GagnantDialogFragment() {
@@ -64,17 +71,40 @@ public class GagnantDialogFragment extends DialogFragment {
         // Pass null as the parent view because its going in the dialog layout
         builder.setView(inflater.inflate(R.layout.fragment_gagnants, null));
 
+
+
+
+        //Gestion de la DB
+
+        final AppDatabase db = Room.databaseBuilder(getActivity().getApplicationContext(), AppDatabase.class, "production")
+                .allowMainThreadQueries()
+                .build();
+
+        parties =db.partieDao().getAllParties();
+        partie = db.partieDao().loadPartieById(parties.size());
+
+
+
         tv_gagnant=getActivity().findViewById(R.id.tv_equipe_gagnante);
 
 
-        builder.setMessage("coucou")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        if (partie.getScoreEquipeA()>partie.getScoreEquipeB()){
+
+            builder.setMessage("L'équipe 1 a gagné !");
+        }else{
+
+            builder.setMessage("L'équipe 2 a gagné !");
+        }
+
+
+
+        builder.setPositiveButton("Rejouer partie", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // Send the positive button event back to the host activity
                         mListener.onDialogPositiveClick(GagnantDialogFragment.this);
                     }
                 })
-                .setNegativeButton("Autres Equipes", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Rejoueur Autres Equipes/Stop", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // Send the negative button event back to the host activity
                         mListener.onDialogNegativeClick(GagnantDialogFragment.this);
@@ -86,18 +116,5 @@ public class GagnantDialogFragment extends DialogFragment {
         return builder.create();
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
