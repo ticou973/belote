@@ -4,6 +4,7 @@ import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.thierrycouilleault.belotescore.Controller.Fragments.GagnantDialogFragment;
 import com.example.thierrycouilleault.belotescore.Model.BDD.AppDatabase;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Couleur;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Donne;
@@ -27,7 +29,7 @@ import com.example.thierrycouilleault.belotescore.R;
 
 import java.util.List;
 
-public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
+public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener, GagnantDialogFragment.GagnantDialogListener {
 
     //Composants graphiques
 
@@ -160,13 +162,22 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
 
                 partie.setPartieterminee(true);
                 fab_ajout_donne.setVisibility(View.INVISIBLE);
-                Toast.makeText(this, "La partie est terminée", Toast.LENGTH_SHORT).show();
 
+                if (scoreTotalEquipe1>scoreTotalEquipe2){
+                    Toast.makeText(this, "La partie est terminée ! L'équipe 1 a gagné !", Toast.LENGTH_LONG).show();
+                    showNoticeDialog();
+
+
+                }else{
+                    Toast.makeText(this, "La partie est terminée ! L'équipe 2 a gagné !", Toast.LENGTH_LONG).show();
+                   showNoticeDialog();
+
+                }
         }
 
 
-
         db.partieDao().updatePartie(partie);
+
 
     }
 
@@ -246,5 +257,29 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
             startActivity(intent2);
 
         }
+    }
+
+    //gestion de la boite de dialogue pour le gagnant
+
+    public void showNoticeDialog() {
+        // Create an instance of the dialog fragment and show it
+        DialogFragment dialog = new GagnantDialogFragment();
+        dialog.show(getSupportFragmentManager(), "GagnantDialogFragment");
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+
     }
 }

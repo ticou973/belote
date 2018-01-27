@@ -60,6 +60,7 @@
             android:orientation="vertical"
             tools:context="com.example.thierrycouilleault.belotescore.Controller.Activity.TableScoreActivity">
 
+
             <RadioGroup
                 android:id="@+id/rg_preneur"
                 android:layout_width="match_parent"
