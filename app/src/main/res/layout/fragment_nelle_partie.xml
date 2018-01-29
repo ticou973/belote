@@ -232,7 +232,6 @@
                         android:ems="10"
                         android:inputType="number"
                         android:numeric="integer"
-                        android:text="1001"
                         android:textAlignment="center"
                         android:textColor="@android:color/darker_gray"
                         android:textStyle="bold"

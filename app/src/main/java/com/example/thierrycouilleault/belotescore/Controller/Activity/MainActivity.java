@@ -1,14 +1,18 @@
 package com.example.thierrycouilleault.belotescore.Controller.Activity;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Explode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.FrameLayout;
 
 import com.example.thierrycouilleault.belotescore.Controller.Fragments.HistoFragment;
@@ -32,8 +36,8 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
     //Données
 
-    public static final String EXTRA_MESSAGE="com.example.thierrycouilleault.belotescore.MESSAGE";
-    public String  mj ="MODE JOUEUR", me ="MODE EQUIPE";
+    public static final String EXTRA="com.example.thierrycouilleault.belotescore.MESSAGE";
+    public String  mj ="MODE JOUEUR", me ="MODE EQUIPE", TAG;
 
 
     //instanciation des fragments
@@ -57,6 +61,20 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Gestion des préférences
+
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+
+
+        //SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        //Toast.makeText(this, sharedPref.getString("nb_points_gagnés", ""), Toast.LENGTH_LONG).show();
+
+
+        // enable transitions
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+
         setContentView(R.layout.activity_main);
 
 
@@ -105,6 +123,9 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.it_preferences:
+
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
 
                 return true;
             case R.id.it_noter_app:
@@ -172,9 +193,14 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
     @Override
     public void commencerPartie() {
-       Intent intent = new Intent(this, ScoreActivity.class);
 
-       startActivity(intent);
+        getWindow().setExitTransition(new Explode());
+
+        Intent intent = new Intent(this, ScoreActivity.class);
+
+        startActivity(intent,
+                ActivityOptions
+                        .makeSceneTransitionAnimation(this).toBundle());
 
     }
 

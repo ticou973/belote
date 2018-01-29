@@ -3,7 +3,9 @@ package com.example.thierrycouilleault.belotescore.Controller.Fragments;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
@@ -48,7 +50,7 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
     //Données
 
     private Joueur joueur1, joueur2, joueur3, joueur4;
-    private int joueurId1, joueurId2, joueurId3, joueurId4;
+    private int nbPoints;
     private Equipe equipeA, equipeB;
     private Equipes equipes;
     private TypeDePartie type;
@@ -58,7 +60,7 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
     private boolean sensJeuBoolean;
     private TypeAnnonce typeAnnonce;
     private TypeJeu typeJeu;
-    private String v = "Vous", vp ="Votre partenaire", avg ="A votre gauche", avd ="A votre droite";
+    private String v = "Vous", vp ="Votre partenaire", avg ="A votre gauche", avd ="A votre droite", nbPointsString;
 
 
     public NellePartieFragment() {
@@ -103,6 +105,10 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+
+        nbPointsString = sharedPref.getString("nb_donnes_gagner","");
 
 
 
@@ -163,6 +169,9 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
         bt_suivant_joueurs_type_partie.setEnabled(false);
         bt_suivant_joueurs_type_partie.setAlpha(0.2f);
         et_joueur1.requestFocus();
+
+
+        //et_points.setText(nbPointsString);
 
 
 

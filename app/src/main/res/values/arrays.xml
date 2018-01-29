@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_crit_fin_partie_entries">
+        <item> Nombre de points</item>
+        <item> Nombre de donnes</item>
+    </string-array>
+
+    <string-array name="pref_crit_fin_partie_values">
+        <item> TypeJeu.POINTS</item>
+        <item> TypeJeu.DONNES</item>
+    </string-array>
+
+    <string-array name="val_def_entries">
+        <item> Valeurs actuelles</item>
+        <item> Valeurs par défaut</item>
+
+    </string-array>
+    <string-array name="val_def_values">
+        <item> false </item>
+        <item> true </item>
+    </string-array>
+</resources>

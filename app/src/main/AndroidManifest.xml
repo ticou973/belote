@@ -29,7 +29,8 @@
                 android:value=".Controller.Activity.MainActivity" />
         </activity>
         <activity android:name=".Controller.Activity.ScoreActivity" />
-        <activity android:name=".Controller.Activity.TableScoreActivity"></activity>
+        <activity android:name=".Controller.Activity.TableScoreActivity" />
+        <activity android:name=".Controller.Activity.SettingsActivity"></activity>
     </application>
 
 </manifest>
