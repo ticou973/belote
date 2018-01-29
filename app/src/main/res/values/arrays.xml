@@ -10,13 +10,4 @@
         <item> TypeJeu.DONNES</item>
     </string-array>
 
-    <string-array name="val_def_entries">
-        <item> Valeurs actuelles</item>
-        <item> Valeurs par défaut</item>
-
-    </string-array>
-    <string-array name="val_def_values">
-        <item> false </item>
-        <item> true </item>
-    </string-array>
 </resources>

@@ -28,9 +28,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Controller.Activity.MainActivity" />
         </activity>
-        <activity android:name=".Controller.Activity.ScoreActivity" />
+        <activity android:name=".Controller.Activity.ScoreActivity"
+            android:parentActivityName=".Controller.Activity.MainActivity"/>
         <activity android:name=".Controller.Activity.TableScoreActivity" />
-        <activity android:name=".Controller.Activity.SettingsActivity"></activity>
+        <activity android:name=".Controller.Activity.SettingsActivity"
+            android:parentActivityName=".Controller.Activity.MainActivity" />
+        <activity android:name=".Controller.Activity.ValDefActivity"></activity>
     </application>
 
 </manifest>

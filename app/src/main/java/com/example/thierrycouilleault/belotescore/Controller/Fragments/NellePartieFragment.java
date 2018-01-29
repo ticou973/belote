@@ -60,7 +60,7 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
     private boolean sensJeuBoolean;
     private TypeAnnonce typeAnnonce;
     private TypeJeu typeJeu;
-    private String v = "Vous", vp ="Votre partenaire", avg ="A votre gauche", avd ="A votre droite", nbPointsString;
+    private String v = "Vous", vp ="Votre partenaire", avg ="A votre gauche", avd ="A votre droite", nbPointsString, nbDonnesString;
 
 
     public NellePartieFragment() {
@@ -108,7 +108,8 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
 
-        nbPointsString = sharedPref.getString("nb_donnes_gagner","");
+        nbPointsString = sharedPref.getString("nb_points_gagnés","");
+        nbDonnesString =sharedPref.getString("nb_donnes_gagner","");
 
 
 
@@ -171,9 +172,8 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
         et_joueur1.requestFocus();
 
 
-        //et_points.setText(nbPointsString);
-
-
+        et_points.setText(nbPointsString);
+        et_donnes.setText(nbDonnesString);
 
 
 
@@ -279,11 +279,18 @@ public class NellePartieFragment extends Fragment implements View.OnClickListene
 
             //lancement d'une partie avec points
             if (type.getTypeJeu() == TypeJeu.POINTS.toString()) {
-                int nbPointsPartie = Integer.parseInt(et_points.getText().toString());
+                if (et_points.getText().toString()==""){
 
-                //Remplissage du type de jeu
-                type.setNbPoints(nbPointsPartie);
-                type.setNbDonnes(1000);
+                    //todo gestion des noms et edittexr avec rien
+
+                }else {
+
+                    int nbPointsPartie = Integer.parseInt(et_points.getText().toString());
+
+                    //Remplissage du type de jeu
+                    type.setNbPoints(nbPointsPartie);
+                    type.setNbDonnes(1000);
+                }
 
                 //lancement d'une partie avec donnes
             } else {

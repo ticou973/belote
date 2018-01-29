@@ -2,6 +2,7 @@ package com.example.thierrycouilleault.belotescore.Controller.Activity;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
@@ -14,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.example.thierrycouilleault.belotescore.Controller.Fragments.HistoFragment;
 import com.example.thierrycouilleault.belotescore.Controller.Fragments.JoueursFragment;
@@ -64,12 +66,14 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
         //Gestion des préférences
 
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String nbPointsString = sharedPref.getString("nb_points_gagnés", "600");
 
 
-        //SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
-        //Toast.makeText(this, sharedPref.getString("nb_points_gagnés", ""), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, nbPointsString, Toast.LENGTH_LONG).show();
 
 
         // enable transitions

@@ -68,6 +68,7 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
         setSupportActionBar(toolbar2);
         actionBar2 = getSupportActionBar();
         actionBar2.setTitle("Scores Belote");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Autres composants graphiques
         tv_joueur1=findViewById(R.id.tv_joueur1);
