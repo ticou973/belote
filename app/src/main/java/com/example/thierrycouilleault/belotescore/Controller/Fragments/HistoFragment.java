@@ -50,6 +50,7 @@ public class HistoFragment extends Fragment {
 
 
 
+
         //Gestion de la DB
 
         final AppDatabase db = Room.databaseBuilder(getActivity().getApplicationContext(), AppDatabase.class, "production")

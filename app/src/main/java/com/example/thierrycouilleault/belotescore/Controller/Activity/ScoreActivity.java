@@ -2,7 +2,9 @@ package com.example.thierrycouilleault.belotescore.Controller.Activity;
 
 import android.arch.persistence.room.Room;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
@@ -26,8 +28,12 @@ import com.example.thierrycouilleault.belotescore.Model.BDD.Joueur;
 import com.example.thierrycouilleault.belotescore.Model.BDD.Partie;
 import com.example.thierrycouilleault.belotescore.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener, GagnantDialogFragment.GagnantDialogListener {
 
     //Composants graphiques
@@ -53,6 +59,11 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
     public Equipe equipeA, equipeB;
     public List<Joueur> joueurs;
     public List<Partie> parties;
+
+    //dates
+    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    Date date = new Date();
+    public TextView tv_date;
 
 
 
@@ -84,7 +95,9 @@ public class ScoreActivity extends AppCompatActivity implements RadioGroup.OnChe
         rgb2 = findViewById(R.id.rgb2);
         rgb2.setOnCheckedChangeListener(this);
 
+        tv_date=findViewById(R.id.tv_date);
 
+        tv_date.setText(dateFormat.format(date));
 
         //Traitement du recycler view
 
